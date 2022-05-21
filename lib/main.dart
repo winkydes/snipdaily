@@ -1,11 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:snipdaily/ProfileFragment.dart';
+import 'package:snipdaily/AskFragment.dart';
+import 'package:snipdaily/HomeFragment.dart';
 
 void main() {
-  runApp(const SnipDaily());
+  runApp( const SnipDaily());
 }
 
-class SnipDaily extends StatelessWidget {
+class SnipDaily extends StatefulWidget {
   const SnipDaily({Key? key}) : super(key: key);
+
+  @override
+  State<SnipDaily> createState() => _SnipDailyState();
+}
+
+class _SnipDailyState extends State<SnipDaily> {
+
+  int selectedIndex = 0;
+
+  final widgetOptions = [
+    const HomeFragment(),
+    const AskFragment(),
+    const ProfileFragment(),
+  ];
+
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
+  final widgetTitle = ["Home", "Ask", "Profile"];
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +38,10 @@ class SnipDaily extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.purpleAccent,
-          title: const Text('Demo'),
+          title: Text(widgetTitle.elementAt(selectedIndex)),
         ),
         body: Center(
-          child: Container(
-            color: Colors.blue,
-            height: 100,
-            width: 100,
-            child: const Text('Home'),
-            ),
-          
+          child: widgetOptions.elementAt(selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
@@ -40,6 +59,9 @@ class SnipDaily extends StatelessWidget {
             ),
             
           ],
+          currentIndex: selectedIndex,
+          onTap: onItemTapped,
+
         ),
       ),
     );

@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+
+class HomeFragment extends StatefulWidget {
+  const HomeFragment({Key? key}) : super(key: key);
+
+  @override
+  State<HomeFragment> createState() => _HomeFragmentState();
+}
+
+class _HomeFragmentState extends State<HomeFragment> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Center(
+          child: Text("This is home screen"),
+        ),
+      ],
+    );
+  }
+}
