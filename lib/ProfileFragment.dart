@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snipdaily/main.dart';
 
 class ProfileFragment extends StatefulWidget {
   const ProfileFragment({Key? key}) : super(key: key);
@@ -12,9 +13,14 @@ class _ProfileFragmentState extends State<ProfileFragment> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
+      children: [
         Center(
-          child: Text("This is profile screen"),
+          child: ElevatedButton(
+            child: const Text('Login'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+          )
         ),
       ],
     );
