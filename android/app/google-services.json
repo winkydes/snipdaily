@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "943530903500",
+    "project_id": "snip-daily",
+    "storage_bucket": "snip-daily.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943530903500:android:d779fc51d7d4ab01cb3f69",
+        "android_client_info": {
+          "package_name": "com.example.snipdaily"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943530903500-mgmlq42h5fdrcma4jekq3toih5jenalv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu8qN0SdZI4BfriWOf0dKLSxLqOcfilNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943530903500-mgmlq42h5fdrcma4jekq3toih5jenalv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "943530903500-8jgs5m2romr8s78a3lg6fnm0l9m8g08d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.snipdaily"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
