@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeFragment extends StatefulWidget {
-  const HomeFragment({Key? key}) : super(key: key);
+class ExploreFragment extends StatefulWidget {
+  const ExploreFragment({Key? key}) : super(key: key);
 
   @override
-  State<HomeFragment> createState() => _HomeFragmentState();
+  State<ExploreFragment> createState() => _ExploreFragmentState();
 }
 
-class _HomeFragmentState extends State<HomeFragment> {
+class _ExploreFragmentState extends State<ExploreFragment> {
   @override
   Widget build(BuildContext context) {
     return Column(

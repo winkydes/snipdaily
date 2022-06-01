@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:snipdaily/ProfileFragment.dart';
-import 'package:snipdaily/AskFragment.dart';
-import 'package:snipdaily/HomeFragment.dart';
-import 'package:snipdaily/CommunityFragment.dart';
+import 'package:snipdaily/fragments/AddSnippetFragment.dart';
+import 'package:snipdaily/fragments/ProfileFragment.dart';
+import 'package:snipdaily/fragments/AskFragment.dart';
+import 'package:snipdaily/fragments/ExploreFragment.dart';
+import 'package:snipdaily/fragments/CommunityFragment.dart';
 
 class SnipDaily extends StatefulWidget {
   const SnipDaily({Key? key}) : super(key: key);
@@ -16,8 +17,9 @@ class _SnipDailyState extends State<SnipDaily> {
   int selectedIndex = 0;
 
   final widgetOptions = [
-    const HomeFragment(),
+    const ExploreFragment(),
     const CommunityFragment(),
+    const AddSnippetFragment(),
     const AskFragment(),
     const ProfileFragment(),
   ];
@@ -28,7 +30,7 @@ class _SnipDailyState extends State<SnipDaily> {
     });
   }
 
-  final widgetTitle = ["Home","Community", "Ask", "Profile"];
+  final widgetTitle = ["Home","Community","Add Snippet", "Ask", "Profile"];
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,10 @@ class _SnipDailyState extends State<SnipDaily> {
             BottomNavigationBarItem(
               icon: Icon(Icons.groups),
               label: 'Community',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              label: 'Contribute',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.question_mark),
