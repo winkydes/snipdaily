@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snipdaily/ProfileFragment.dart';
 import 'package:snipdaily/AskFragment.dart';
 import 'package:snipdaily/HomeFragment.dart';
+import 'package:snipdaily/CommunityFragment.dart';
 
 class SnipDaily extends StatefulWidget {
   const SnipDaily({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _SnipDailyState extends State<SnipDaily> {
 
   final widgetOptions = [
     const HomeFragment(),
+    const CommunityFragment(),
     const AskFragment(),
     const ProfileFragment(),
   ];
@@ -26,7 +28,7 @@ class _SnipDailyState extends State<SnipDaily> {
     });
   }
 
-  final widgetTitle = ["Home", "Ask", "Profile"];
+  final widgetTitle = ["Home","Community", "Ask", "Profile"];
 
   @override
   Widget build(BuildContext context) {
@@ -40,24 +42,28 @@ class _SnipDailyState extends State<SnipDaily> {
           child: widgetOptions.elementAt(selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+              icon: Icon(Icons.search),
+              label: 'Explore',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.groups),
+              label: 'Community',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.question_mark),
-              label: 'Ask',
+              label:'Ask'
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_box),
+              icon: Icon(Icons.account_circle),
               label: 'Account',
             ),
             
           ],
           currentIndex: selectedIndex,
           onTap: onItemTapped,
-
         ),
       ),
     );
