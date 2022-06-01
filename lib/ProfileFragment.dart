@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterfire_ui/auth.dart';
 import 'package:snipdaily/main.dart';
 
 class ProfileFragment extends StatefulWidget {
@@ -11,18 +12,11 @@ class ProfileFragment extends StatefulWidget {
 class _ProfileFragmentState extends State<ProfileFragment> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(
-          child: ElevatedButton(
-            child: const Text('Login'),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-          )
-        ),
+    return const ProfileScreen(
+      providerConfigs:[
+        EmailProviderConfiguration(),
       ],
+      avatarSize: 24,
     );
   }
 }

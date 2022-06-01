@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:snipdaily/MainClass.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutterfire_ui/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 Future<void> main() async {
@@ -18,100 +19,33 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'SnipDaily',
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('SnipDaily'),
-          backgroundColor: const Color.fromRGBO(80, 128, 250, 100),),
-        body: const LoginWidget(),
+        body: LoginWidget(),
       ),
     );
   }
 }
 
-class LoginWidget extends StatefulWidget {
+class LoginWidget extends StatelessWidget {
   const LoginWidget({Key? key}) : super(key: key);
 
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
-}
-
-class _LoginWidgetState extends State<LoginWidget> {
-
-  static const _primaryTextColor = Color.fromRGBO(92, 77, 250, 100);
-
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(231, 224, 236, 255),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            color: Colors.white,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(20),
-            margin: const EdgeInsets.all(10),
-            child: const Text(
-              'SnipDaily',
-              style: TextStyle(
-                color: _primaryTextColor,
-                fontWeight: FontWeight.w500,
-                fontSize: 50,
-              ),
-            )
-          ),
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(10),
-            child: const Text(
-              'Welcome back, please sign in to continue!',
-              style: TextStyle(
-                color: _primaryTextColor,
-                fontWeight: FontWeight.w500,
-                fontSize: 17,
-              ),
-            )
-          ),
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(10),
-            child: TextField(
-              controller: nameController,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'User Name',
-              ),
-            )
-          ),
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(10),
-            child: TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-              ),
-            )
-          ),
-          Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('Login'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SnipDaily())
-                    );
-                  },
-                )
-            ),
-        ],
-      )
-    );
+    return StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        initialData: FirebaseAuth.instance.currentUser,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const SignInScreen(
+              providerConfigs: [
+                EmailProviderConfiguration(),
+              ]
+            );
+          }
+          return const SnipDaily();
+        },
+      );
   }
 }
