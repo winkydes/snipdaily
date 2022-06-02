@@ -22,6 +22,7 @@ class Login extends StatelessWidget {
     return const MaterialApp(
       title: 'SnipDaily',
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: LoginWidget(),
       ),
     );

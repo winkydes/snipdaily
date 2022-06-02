@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class DropdownWidget extends StatefulWidget {
   final List<String> dropdownList;
-  const DropdownWidget({Key? key, required this.dropdownList})
+  final void Function(String) callback;
+  const DropdownWidget({Key? key, required this.dropdownList, required this.callback})
       : super(key: key);
 
   @override
@@ -49,6 +50,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
             onChanged: (String? newValue) {
               setState(() {
                 varValue = newValue!;
+                widget.callback(varValue);
               });
             },
             icon: const Padding(

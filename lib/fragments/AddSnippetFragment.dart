@@ -11,6 +11,65 @@ class AddSnippetFragment extends StatefulWidget {
 class _AddSnippetFragmentState extends State<AddSnippetFragment> {
 
   var languageDropdownItems = [ "C++", "JavaScript", "Python"];
+  String languageValue = "Select";
+  var formatDropdownItems = [ "Text", "Image" ];
+  String formatValue = "Select";
+
+  // This is the text field or image widget depending on the value in formatDropdownItems
+  Widget getFormatWidget() {
+    if (formatValue == "Text") {
+      return Container(
+        margin: const EdgeInsets.only(top: 20, bottom: 20),
+        child: const TextField(
+          decoration: InputDecoration(
+            labelText: "Your code snippet",
+            fillColor: Colors.white,
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey, width: 1.0)
+              ),
+          ),
+          maxLines: 8,
+        ),
+      );
+    }
+    else if (formatValue == "Image") {
+      return Container(
+        margin: const EdgeInsets.all(20),
+        child: const Center(
+          child: Text("Image box (Currently Unsupported)"),
+        )
+      );
+    }
+    else {
+      return const SizedBox.shrink();
+    }
+  }
+
+  Widget submitButton() {
+    if (languageValue == "Select" || formatValue == "Select") {
+      return Container(
+        alignment: Alignment.center,
+        margin: const EdgeInsets.all(20),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.red[200]
+          ),
+          onPressed: () {},
+          child: const Text("Fields are missing")
+        )
+      );
+    }
+    else {
+      return Container(
+        alignment: Alignment.center,
+        margin: const EdgeInsets.all(20),
+        child: ElevatedButton(
+          onPressed: () {  },
+          child: const Text("Submit"),
+        )
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +86,21 @@ class _AddSnippetFragmentState extends State<AddSnippetFragment> {
           ),
           DropdownWidget(
             dropdownList: languageDropdownItems,
-          )
+            callback: (val) => setState(() => languageValue = val)
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 20, bottom: 20),
+            child: Text(
+              'Which format do you want to display your code snippet?',
+              style: Theme.of(context).textTheme.bodyText1,
+            )
+          ),
+          DropdownWidget(
+            dropdownList: formatDropdownItems,
+            callback: (val) => setState(() => formatValue = val)
+          ),
+          getFormatWidget(),
+          submitButton(),
         ]);
   }
 }

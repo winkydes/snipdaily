@@ -40,10 +40,11 @@ class _SnipDailyState extends State<SnipDaily> {
         textTheme: const TextTheme(
           headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
           headline6: TextStyle(fontSize: 20.0),
-          bodyText1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+          bodyText1: TextStyle(fontSize: 18.0, fontFamily: 'Hind'),
         ),
       ),
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 174, 123, 241),
           title: Text(widgetTitle.elementAt(selectedIndex)),
