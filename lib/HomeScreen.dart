@@ -35,9 +35,17 @@ class _SnipDailyState extends State<SnipDaily> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: const Color.fromARGB(255, 174, 123, 241),
+        textTheme: const TextTheme(
+          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 20.0),
+          bodyText1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        ),
+      ),
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.purpleAccent,
+          backgroundColor: const Color.fromARGB(255, 174, 123, 241),
           title: Text(widgetTitle.elementAt(selectedIndex)),
         ),
         body: Center(

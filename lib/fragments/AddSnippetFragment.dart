@@ -9,7 +9,7 @@ class AddSnippetFragment extends StatefulWidget {
 }
 
 class _AddSnippetFragmentState extends State<AddSnippetFragment> {
-  
+
   var languageDropdownItems = [ "C++", "JavaScript", "Python"];
 
   @override
@@ -20,7 +20,10 @@ class _AddSnippetFragmentState extends State<AddSnippetFragment> {
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 20),
-            child: const Text("Please choose a language to start with:"),
+            child: Text(
+              'Please select a language to start with:',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
           ),
           DropdownWidget(
             dropdownList: languageDropdownItems,

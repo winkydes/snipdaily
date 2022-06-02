@@ -10,7 +10,6 @@ class DropdownWidget extends StatefulWidget {
 }
 
 class _DropdownWidgetState extends State<DropdownWidget> {
-  static Color dropDownColor = const Color.fromARGB(255, 174, 123, 241);
   static const String selectDefault = "Select";
   String varValue = "Select";
   static const defaultItem = DropdownMenuItem<String>(
@@ -31,7 +30,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
 
     return (DecoratedBox(
       decoration: BoxDecoration(
-          color: dropDownColor, //background color of dropdown button
+          color: Theme.of(context).primaryColor, //background color of dropdown button
           border: Border.all(
               color: Colors.black38, width: 2), //border of dropdown button
           borderRadius:
@@ -56,7 +55,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                 padding: EdgeInsets.only(left: 20),
                 child: Icon(Icons.arrow_drop_down)),
             iconEnabledColor: Colors.white,
-            dropdownColor: dropDownColor,
+            dropdownColor: Theme.of(context).primaryColor,
             style: const TextStyle(
                 color: Colors.white, //Font color
                 fontSize: 20 //font size on dropdown button
