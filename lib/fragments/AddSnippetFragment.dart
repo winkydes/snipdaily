@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/DropdownWidget.dart';
 
 class AddSnippetFragment extends StatefulWidget {
@@ -10,10 +9,8 @@ class AddSnippetFragment extends StatefulWidget {
 }
 
 class _AddSnippetFragmentState extends State<AddSnippetFragment> {
-  // Initial Selected Value
-  String dropdownValue = 'C++';
-
-  var languageDropdownItems = ["C++", "JavaScript", "Python"];
+  
+  var languageDropdownItems = [ "C++", "JavaScript", "Python"];
 
   @override
   Widget build(BuildContext context) {

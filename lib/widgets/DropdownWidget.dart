@@ -11,10 +11,24 @@ class DropdownWidget extends StatefulWidget {
 
 class _DropdownWidgetState extends State<DropdownWidget> {
   static Color dropDownColor = const Color.fromARGB(255, 174, 123, 241);
-  String value = '';
+  static const String selectDefault = "Select";
+  String varValue = "Select";
+  static const defaultItem = DropdownMenuItem<String>(
+    value: selectDefault,
+    child: Text("Select"),
+  );
 
   @override
   Widget build(BuildContext context) {
+    List<DropdownMenuItem<String>> widgetList =
+        widget.dropdownList.map((String items) {
+          return DropdownMenuItem<String>(
+            value: items,
+            child: Text(items),
+          );
+        }).toList();
+    widgetList.insert(0, defaultItem);
+
     return (DecoratedBox(
       decoration: BoxDecoration(
           color: dropDownColor, //background color of dropdown button
@@ -31,16 +45,11 @@ class _DropdownWidgetState extends State<DropdownWidget> {
       child: Padding(
           padding: const EdgeInsets.only(left: 30, right: 30),
           child: DropdownButton(
-            value: value,
-            items: widget.dropdownList.map((String items) {
-              return DropdownMenuItem(
-                value: items,
-                child: Text(items),
-              );
-            }).toList(),
+            value: varValue,
+            items: widgetList,
             onChanged: (String? newValue) {
               setState(() {
-                value = newValue!;
+                varValue = newValue!;
               });
             },
             icon: const Padding(
