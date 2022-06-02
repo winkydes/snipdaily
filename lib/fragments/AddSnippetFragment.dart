@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snipdaily/fragments/SnippetExtraDataFragment.dart';
 import '../widgets/DropdownWidget.dart';
 
 class AddSnippetFragment extends StatefulWidget {
@@ -64,8 +65,11 @@ class _AddSnippetFragmentState extends State<AddSnippetFragment> {
         alignment: Alignment.center,
         margin: const EdgeInsets.all(20),
         child: ElevatedButton(
-          onPressed: () {  },
-          child: const Text("Submit"),
+          onPressed: () { Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SnippetExtraDataFragment())
+          ); },
+          child: const Text("Proceed"),
         )
       );
     }
