@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/DropdownWidget.dart';
+
 class AddSnippetFragment extends StatefulWidget {
   const AddSnippetFragment({Key? key}) : super(key: key);
 
@@ -9,28 +11,23 @@ class AddSnippetFragment extends StatefulWidget {
 
 class _AddSnippetFragmentState extends State<AddSnippetFragment> {
   // Initial Selected Value
-  String dropdownvalue = 'C++';
+  String dropdownValue = 'C++';
 
-  var dropdownItems = ["C++", "JavaScript", "Python"];
+  var languageDropdownItems = ["C++", "JavaScript", "Python"];
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      DropdownButton(
-        // Initial Value
-        value: dropdownvalue,
-        items: dropdownItems.map((String items) {
-          return DropdownMenuItem(
-            value: items,
-            child: Text(items),
-          );
-        }).toList(),
-        onChanged: (String? newValue) {
-          setState(() {
-            dropdownvalue = newValue!;
-          });
-        },
-      )
-    ]);
+    return ListView(
+        padding:
+            const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
+        children: [
+          Container(
+            margin: const EdgeInsets.only(bottom: 20),
+            child: const Text("Please choose a language to start with:"),
+          ),
+          DropdownWidget(
+            dropdownList: languageDropdownItems,
+          )
+        ]);
   }
 }
