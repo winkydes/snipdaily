@@ -16,36 +16,6 @@ class _AddSnippetFragmentState extends State<AddSnippetFragment> {
   var formatDropdownItems = [ "Text", "Image" ];
   String formatValue = "Select";
 
-  // This is the text field or image widget depending on the value in formatDropdownItems
-  Widget getFormatWidget() {
-    if (formatValue == "Text") {
-      return Container(
-        margin: const EdgeInsets.only(top: 20, bottom: 20),
-        child: const TextField(
-          decoration: InputDecoration(
-            labelText: "Your code snippet",
-            fillColor: Colors.white,
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey, width: 1.0)
-              ),
-          ),
-          maxLines: 8,
-        ),
-      );
-    }
-    else if (formatValue == "Image") {
-      return Container(
-        margin: const EdgeInsets.all(20),
-        child: const Center(
-          child: Text("Image box (Currently Unsupported)"),
-        )
-      );
-    }
-    else {
-      return const SizedBox.shrink();
-    }
-  }
-
   Widget submitButton() {
     if (languageValue == "Select" || formatValue == "Select") {
       return Container(
@@ -67,7 +37,7 @@ class _AddSnippetFragmentState extends State<AddSnippetFragment> {
         child: ElevatedButton(
           onPressed: () { Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const SnippetExtraDataFragment())
+            MaterialPageRoute(builder: (context) => SnippetExtraDataFragment(language: languageValue, format: formatValue))
           ); },
           child: const Text("Proceed"),
         )
@@ -103,7 +73,6 @@ class _AddSnippetFragmentState extends State<AddSnippetFragment> {
             dropdownList: formatDropdownItems,
             callback: (val) => setState(() => formatValue = val)
           ),
-          getFormatWidget(),
           submitButton(),
         ]);
   }
