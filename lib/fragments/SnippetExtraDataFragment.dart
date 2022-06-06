@@ -18,6 +18,7 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
           title: const Text("Tell us more about your snippet!"),
           appBar: AppBar(),
           widgets: const [],
+          pageContext: context,
         ),
         body: const Center(child: Text("This is snippet extra data fragment"),)
       )

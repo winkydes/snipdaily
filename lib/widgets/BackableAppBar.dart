@@ -4,8 +4,9 @@ class BackableAppBar extends StatelessWidget with PreferredSizeWidget {
   final Text title;
   final AppBar appBar;
   final List<Widget> widgets;
+  final BuildContext pageContext;
 
-  const BackableAppBar({Key? key, required this.title, required this.appBar, required this.widgets }) : super(key: key);
+  const BackableAppBar({Key? key, required this.title, required this.appBar, required this.widgets, required this.pageContext }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class BackableAppBar extends StatelessWidget with PreferredSizeWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(pageContext);
             },
           ),
           title,
