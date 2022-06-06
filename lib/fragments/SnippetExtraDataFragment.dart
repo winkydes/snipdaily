@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snipdaily/widgets/BackableAppBar.dart';
 
 class SnippetExtraDataFragment extends StatefulWidget {
   const SnippetExtraDataFragment({Key? key}) : super(key: key);
@@ -13,22 +14,10 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
     return MaterialApp(
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Row(
-            children: <Widget>[
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            const Text("Tell us more about your snippet!"),
-          ],
-          ),
-          backgroundColor: const Color.fromARGB(255, 174, 123, 241),
+        appBar: BackableAppBar(
+          title: const Text("Tell us more about your snippet!"),
+          appBar: AppBar(),
+          widgets: const [],
         ),
         body: const Center(child: Text("This is snippet extra data fragment"),)
       )
