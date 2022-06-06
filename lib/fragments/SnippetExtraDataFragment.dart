@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:snipdaily/widgets/BackableAppBar.dart';
 import 'package:snipdaily/widgets/InputTextField.dart';
 
+import '../HomeScreen.dart';
+
+var db = FirebaseFirestore.instance;
 class SnippetExtraDataFragment extends StatefulWidget {
   final String language;
   final String format;
@@ -51,14 +55,17 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
       );
     }
     else {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text("codeSnippet: ${snippetController.text}codeTitle: ${titleController.text}snippetDescription: ${descriptionController.text}"),
-          );
-        },
-      );
+      final snippet = <String, dynamic> {
+        "code": snippetController.text,
+        "language": widget.language,
+        "formatType": widget.format,
+        "title": titleController.text,
+        "description": descriptionController.text,
+      };
+      db.collection("snippets").add(snippet).then((DocumentReference doc) => print("DocumentSnapshot added with ID: ${doc.id}"));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SnipDaily()));
     }
   }
 
