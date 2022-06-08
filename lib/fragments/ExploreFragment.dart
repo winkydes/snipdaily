@@ -12,14 +12,16 @@ class ExploreFragment extends StatefulWidget {
 }
 class _ExploreFragmentState extends State<ExploreFragment> {
 
+  // take data from firebase in the form of Stream<Iterable<Snippet>>
   late final Stream<Iterable<Snippet>> _snippetStream = FirebaseFirestore.instance.collection('snippets').snapshots().map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
 
   late final List<Widget> snippetList = [];
 
+  // initialize snippetList for rendering in screen
   @override
   void initState() {
     _snippetStream.forEach((element) => { 
-      element.forEach((snip) => snippetList.add(SnippetCardView(title: snip.title, language: snip.language, author: "keith")))
+      element.forEach((snip) => snippetList.add(SnippetCardView(title: snip.title, language: snip.language, snipId: snip.id)))
      });
     super.initState();
   }
@@ -46,16 +48,5 @@ class _ExploreFragmentState extends State<ExploreFragment> {
         );
       }
     );
-
-    // return ListView(
-    //     padding:
-    //         const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
-    //     children: const <Widget> [
-    //       SnippetCardView(
-    //           title: "",
-    //           language: "Test Language",
-    //           author: "Keith"
-    //       ),
-    //     ]);
   }
 }
