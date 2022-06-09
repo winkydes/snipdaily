@@ -39,6 +39,7 @@ class _SnipDailyState extends State<SnipDaily> {
         primaryColor: const Color.fromARGB(255, 174, 123, 241),
         textTheme: const TextTheme(
           headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline5: TextStyle(fontWeight: FontWeight.bold),
           headline6: TextStyle(fontSize: 20.0),
           bodyText1: TextStyle(fontSize: 18.0, fontFamily: 'Hind'),
         ),

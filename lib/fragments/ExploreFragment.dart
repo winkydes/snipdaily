@@ -21,7 +21,7 @@ class _ExploreFragmentState extends State<ExploreFragment> {
   @override
   void initState() {
     _snippetStream.forEach((element) => { 
-      element.forEach((snip) => snippetList.add(SnippetCardView(title: snip.title, language: snip.language, snipId: snip.id)))
+      element.forEach((snip) => snippetList.add(SnippetCardView(cardSnippet: snip,)))
      });
     super.initState();
   }

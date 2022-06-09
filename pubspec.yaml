@@ -92,3 +92,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Consolas
+      fonts:
+        - asset: lib/assets/fonts/CONSOLA.ttf
