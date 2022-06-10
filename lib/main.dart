@@ -45,7 +45,11 @@ class LoginWidget extends StatelessWidget {
               ]
             );
           }
-          return const HomeScreen();
+          // this email can later be change to any admin email
+          else if (snapshot.data?.email == "keithlam0110@gmail.com") {
+            return const HomeScreen(isAdmin: true);
+          }
+          return const HomeScreen(isAdmin: false);
         },
       );
   }

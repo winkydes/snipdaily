@@ -65,7 +65,7 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
       db.collection("snippets").add(snippet).then((DocumentReference doc) => print("DocumentSnapshot added with ID: ${doc.id}"));
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()));
+        MaterialPageRoute(builder: (context) => const HomeScreen(isAdmin: false)));
     }
   }
 
