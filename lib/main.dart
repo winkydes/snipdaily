@@ -45,7 +45,7 @@ class LoginWidget extends StatelessWidget {
               ]
             );
           }
-          return const SnipDaily();
+          return const HomeScreen();
         },
       );
   }

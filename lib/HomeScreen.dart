@@ -4,16 +4,16 @@ import 'package:snipdaily/fragments/ProfileFragment.dart';
 import 'package:snipdaily/fragments/AskFragment.dart';
 import 'package:snipdaily/fragments/ExploreFragment.dart';
 import 'package:snipdaily/fragments/CommunityFragment.dart';
+import 'package:snipdaily/fragments/SettingsFragment.dart';
 
-class SnipDaily extends StatefulWidget {
-  const SnipDaily({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<SnipDaily> createState() => _SnipDailyState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _SnipDailyState extends State<SnipDaily> {
-
+class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
   final widgetOptions = [
@@ -30,7 +30,33 @@ class _SnipDailyState extends State<SnipDaily> {
     });
   }
 
-  final widgetTitle = ["Home","Community","Add Snippet", "Ask", "Profile"];
+  AppBar customAppbar() {
+    if (selectedIndex == 4) {
+      return AppBar(
+        backgroundColor: const Color.fromARGB(255, 174, 123, 241),
+        title: Text(widgetTitle.elementAt(selectedIndex)),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsFragment()));
+            },
+          )
+        ],
+      );
+    }
+    else {
+      return AppBar(
+          backgroundColor: const Color.fromARGB(255, 174, 123, 241),
+          title: Text(widgetTitle.elementAt(selectedIndex)),
+        );
+    }
+  }
+
+  final widgetTitle = ["Home", "Community", "Add Snippet", "Ask", "Profile"];
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +72,7 @@ class _SnipDailyState extends State<SnipDaily> {
       ),
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 174, 123, 241),
-          title: Text(widgetTitle.elementAt(selectedIndex)),
-        ),
+        appBar: customAppbar(),
         body: Center(
           child: widgetOptions.elementAt(selectedIndex),
         ),
@@ -69,14 +92,11 @@ class _SnipDailyState extends State<SnipDaily> {
               label: 'Contribute',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.question_mark),
-              label:'Ask'
-            ),
+                icon: Icon(Icons.question_mark), label: 'Ask'),
             BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
               label: 'Account',
             ),
-            
           ],
           currentIndex: selectedIndex,
           onTap: onItemTapped,
