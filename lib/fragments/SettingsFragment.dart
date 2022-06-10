@@ -15,7 +15,10 @@ class SettingsFragment extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.all(20),
           children:const [
-            SettingsItemWidget()
+            SettingsItemWidget(name: "Light/Dark mode"),
+            SettingsItemWidget(name: "Change Preference"),
+            SettingsItemWidget(name: "Change Your Password"),
+            SettingsItemWidget(name: "Contact us"),
           ],
         ),
       ),

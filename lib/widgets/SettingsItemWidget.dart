@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SettingsItemWidget extends StatelessWidget {
-  const SettingsItemWidget({Key? key}) : super(key: key);
+
+  final String name;
+
+  const SettingsItemWidget({Key? key, required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +15,10 @@ class SettingsItemWidget extends StatelessWidget {
           ),
           borderRadius: const BorderRadius.all(Radius.circular(12)),
         ),
-        child: const SizedBox(
+        child: SizedBox(
           width: 200,
           height: 50,
-          child: Center(child: Text('Change Preference')),
+          child: Center(child: Text(name)),
         ),
     );
   }
