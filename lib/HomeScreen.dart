@@ -6,6 +6,8 @@ import 'package:snipdaily/fragments/SnippetListFragment.dart';
 import 'package:snipdaily/fragments/CommunityFragment.dart';
 import 'package:snipdaily/fragments/SettingsFragment.dart';
 
+import 'fragments/ExploreFragment.dart';
+
 class HomeScreen extends StatefulWidget {
   final bool isAdmin;
   const HomeScreen({Key? key, required this.isAdmin}) : super(key: key);
@@ -18,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
   var widgetOptions = [
-    const SnippetListFragment(),
+    const ExploreFragment(),
     const CommunityFragment(),
     const AddSnippetFragment(),
     const AskFragment(),
@@ -121,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!widget.isAdmin) {
       setState(() {
         widgetOptions = [
-          const SnippetListFragment(),
+          const ExploreFragment(),
           const CommunityFragment(),
           const AskFragment(),
           const ProfileFragment(),
