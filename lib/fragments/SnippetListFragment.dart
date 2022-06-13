@@ -6,7 +6,8 @@ import 'package:snipdaily/widgets/SnippetCardView.dart';
 import '../backend/models.dart';
 
 class SnippetListFragment extends StatefulWidget {
-  const SnippetListFragment({Key? key}) : super(key: key);
+  final String type;
+  const SnippetListFragment({Key? key, required this.type}) : super(key: key);
 
   @override
   State<SnippetListFragment> createState() => _SnippetListFragmentState();
@@ -32,7 +33,7 @@ class _SnippetListFragmentState extends State<SnippetListFragment> {
 
     return MaterialApp(
       home: Scaffold(
-        appBar: BackableAppBar(title: const Text("Snippet List"), appBar: AppBar(), widgets: [], pageContext: context),
+        appBar: BackableAppBar(title: Text(widget.type), appBar: AppBar(), widgets: [], pageContext: context),
         body: StreamBuilder<Iterable<Snippet>>(
         stream: _snippetStream,
         builder: (context, snapshot) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snipdaily/fragments/SnippetExtraDataFragment.dart';
 import '../widgets/DropdownWidget.dart';
+import 'package:snipdaily/assets/constants.dart';
 
 class AddSnippetFragment extends StatefulWidget {
   const AddSnippetFragment({Key? key}) : super(key: key);
@@ -11,11 +12,11 @@ class AddSnippetFragment extends StatefulWidget {
 
 class _AddSnippetFragmentState extends State<AddSnippetFragment> {
 
-  var languageDropdownItems = [ "C++", "JavaScript", "Python"];
+  var languageDropdownItems = LANGUAGE;
   String languageValue = "Select";
   var formatDropdownItems = [ "Text", "Image" ];
   String formatValue = "Select";
-  var snippetTypeDropdownItems = ["General", "Data Structure", "Web/app Development", "Data Science", "Algorithms and Logic", "Articles"];
+  var snippetTypeDropdownItems = TYPE;
   String typeValue = "Select";
 
   Widget submitButton() {

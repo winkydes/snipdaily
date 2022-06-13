@@ -12,7 +12,7 @@ class ExploreFragment extends StatefulWidget {
 GestureDetector customContainer(String type, Color? cardColor, BuildContext context) {
   return GestureDetector(
     onTap: (() => Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const SnippetListFragment()))),
+        MaterialPageRoute(builder: (context) => SnippetListFragment(type: type)))),
     child: Container(
       padding: const EdgeInsets.all(8),
       color: cardColor,
@@ -25,8 +25,9 @@ class _ExploreFragmentState extends State<ExploreFragment> {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
+      physics: const NeverScrollableScrollPhysics(),
       primary: false,
-      padding: const EdgeInsets.all(55),
+      padding: const EdgeInsets.all(30),
       crossAxisSpacing: 20,
       mainAxisSpacing: 20,
       crossAxisCount: 2,
