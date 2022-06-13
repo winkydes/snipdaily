@@ -15,7 +15,7 @@ class SnippetListFragment extends StatefulWidget {
 class _SnippetListFragmentState extends State<SnippetListFragment> {
 
   // take data from firebase in the form of Stream<Iterable<Snippet>>
-  late final Stream<Iterable<Snippet>> _snippetStream = FirebaseFirestore.instance.collection('snippets').snapshots().map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
+  late final Stream<Iterable<Snippet>> _snippetStream = FirebaseFirestore.instance.collection('snippets').where("type", isEqualTo: widget.type).snapshots().map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
 
   late final List<Widget> snippetList = [];
 
@@ -45,6 +45,11 @@ class _SnippetListFragmentState extends State<SnippetListFragment> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
+            );
+          }
+          if (snippetList.isEmpty) {
+            return const Center(
+              child: Text('There is no snippets related to this topic yet, please wait for an update to the database.', textAlign: TextAlign.center,),
             );
           }
           return ListView(
