@@ -21,6 +21,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
       case 'C++':
         return Wrap(children: [
           Container(
+              margin: const EdgeInsets.only(left: 5, right: 5),
               padding: const EdgeInsets.all(10),
               decoration: containerDec(Colors.blue),
               child: const Text('C++')),
@@ -28,6 +29,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
       case 'JavaScript':
         return Wrap(children: [
           Container(
+              margin: const EdgeInsets.only(left: 5, right: 5),
               padding: const EdgeInsets.all(10),
               decoration: containerDec(Colors.yellow),
               child: const Text('JavaScript')),
@@ -35,6 +37,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
       case 'Python':
         return Wrap(children: [
           Container(
+              margin: const EdgeInsets.only(left: 5, right: 5),
               padding: const EdgeInsets.all(10),
               decoration: containerDec(Colors.green),
               child: const Text('Python')),
@@ -43,6 +46,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
         {
           return Wrap(children: [
             Container(
+                margin: const EdgeInsets.only(left: 5, right: 5),
                 padding: const EdgeInsets.all(10),
                 decoration: containerDec(Colors.white),
                 child: const Text('Error')),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snipdaily/fragments/AddSnippetFragment.dart';
 import 'package:snipdaily/fragments/ProfileFragment.dart';
 import 'package:snipdaily/fragments/AskFragment.dart';
-import 'package:snipdaily/fragments/ExploreFragment.dart';
+import 'package:snipdaily/fragments/SnippetListFragment.dart';
 import 'package:snipdaily/fragments/CommunityFragment.dart';
 import 'package:snipdaily/fragments/SettingsFragment.dart';
 
@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
   var widgetOptions = [
-    const ExploreFragment(),
+    const SnippetListFragment(),
     const CommunityFragment(),
     const AddSnippetFragment(),
     const AskFragment(),
@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!widget.isAdmin) {
       setState(() {
         widgetOptions = [
-          const ExploreFragment(),
+          const SnippetListFragment(),
           const CommunityFragment(),
           const AskFragment(),
           const ProfileFragment(),

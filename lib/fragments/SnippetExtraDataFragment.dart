@@ -9,9 +9,10 @@ var db = FirebaseFirestore.instance;
 class SnippetExtraDataFragment extends StatefulWidget {
   final String language;
   final String format;
+  final String type;
 
   const SnippetExtraDataFragment(
-      {Key? key, required this.language, required this.format})
+      {Key? key, required this.language, required this.format, required this.type})
       : super(key: key);
 
   @override
@@ -61,6 +62,7 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
         "formatType": widget.format,
         "title": titleController.text,
         "description": descriptionController.text,
+        "type" : widget.type,
       };
       db.collection("snippets").add(snippet).then((DocumentReference doc) => print("DocumentSnapshot added with ID: ${doc.id}"));
       Navigator.push(

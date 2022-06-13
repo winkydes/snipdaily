@@ -4,6 +4,7 @@ import 'package:snipdaily/widgets/BackableAppBar.dart';
 
 import '../backend/models.dart';
 import '../widgets/LanguageLabel.dart';
+import '../widgets/TypeLabel.dart';
 
 class SnippetDetailFragment extends StatefulWidget {
   final Snippet snip;
@@ -39,7 +40,13 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                   ),
               ),
               // label container
-              LanguageLabel(language: widget.snip.language),
+              Row(
+                children: <Widget>[
+                  LanguageLabel(language: widget.snip.language),
+                  TypeLabel(type: widget.snip.type),
+                ]
+              ),
+              
               // code container
               Container(
                 margin: const EdgeInsets.only(top: 10, bottom: 10),

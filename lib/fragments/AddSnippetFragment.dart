@@ -15,9 +15,11 @@ class _AddSnippetFragmentState extends State<AddSnippetFragment> {
   String languageValue = "Select";
   var formatDropdownItems = [ "Text", "Image" ];
   String formatValue = "Select";
+  var snippetTypeDropdownItems = ["General", "Data Structure", "Web/app Development", "Data Science", "Algorithms and Logic", "Articles"];
+  String typeValue = "Select";
 
   Widget submitButton() {
-    if (languageValue == "Select" || formatValue == "Select") {
+    if (languageValue == "Select" || formatValue == "Select" || typeValue == "Select") {
       return Container(
         alignment: Alignment.center,
         margin: const EdgeInsets.all(20),
@@ -37,7 +39,7 @@ class _AddSnippetFragmentState extends State<AddSnippetFragment> {
         child: ElevatedButton(
           onPressed: () { Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SnippetExtraDataFragment(language: languageValue, format: formatValue))
+            MaterialPageRoute(builder: (context) => SnippetExtraDataFragment(language: languageValue, format: formatValue, type: typeValue))
           ); },
           child: const Text("Proceed"),
         )
@@ -72,6 +74,17 @@ class _AddSnippetFragmentState extends State<AddSnippetFragment> {
           DropdownWidget(
             dropdownList: formatDropdownItems,
             callback: (val) => setState(() => formatValue = val)
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 20, bottom: 20),
+            child: Text(
+              'What is the category of the code snippet?',
+              style: Theme.of(context).textTheme.bodyText1,
+            )
+          ),
+          DropdownWidget(
+            dropdownList: snippetTypeDropdownItems,
+            callback: (val) => setState(() => typeValue = val)
           ),
           submitButton(),
         ]);

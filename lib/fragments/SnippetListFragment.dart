@@ -4,13 +4,13 @@ import 'package:snipdaily/widgets/SnippetCardView.dart';
 
 import '../backend/models.dart';
 
-class ExploreFragment extends StatefulWidget {
-  const ExploreFragment({Key? key}) : super(key: key);
+class SnippetListFragment extends StatefulWidget {
+  const SnippetListFragment({Key? key}) : super(key: key);
 
   @override
-  State<ExploreFragment> createState() => _ExploreFragmentState();
+  State<SnippetListFragment> createState() => _SnippetListFragmentState();
 }
-class _ExploreFragmentState extends State<ExploreFragment> {
+class _SnippetListFragmentState extends State<SnippetListFragment> {
 
   // take data from firebase in the form of Stream<Iterable<Snippet>>
   late final Stream<Iterable<Snippet>> _snippetStream = FirebaseFirestore.instance.collection('snippets').snapshots().map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
