@@ -75,7 +75,7 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const HomeScreen(isAdmin: false)));
+              builder: (context) => const HomeScreen(isAdmin: true)));
     }
   }
 
