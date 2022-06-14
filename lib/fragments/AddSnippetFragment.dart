@@ -51,6 +51,7 @@ class _AddSnippetFragmentState extends State<AddSnippetFragment> {
   @override
   Widget build(BuildContext context) {
     return ListView(
+        physics: const NeverScrollableScrollPhysics(),
         padding:
             const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
         children: [

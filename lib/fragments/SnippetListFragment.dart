@@ -1,10 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:snipdaily/widgets/BackableAppBar.dart';
 import 'package:snipdaily/widgets/SnippetCardView.dart';
-
-import '../assets/GlobalTheme.dart';
 import '../backend/models.dart';
 
 class SnippetListFragment extends StatefulWidget {
