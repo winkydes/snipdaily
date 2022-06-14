@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:snipdaily/widgets/BackableAppBar.dart';
 
+import '../assets/GlobalTheme.dart';
 import '../backend/models.dart';
 import '../widgets/LanguageLabel.dart';
 import '../widgets/TypeLabel.dart';
@@ -18,7 +20,11 @@ class SnippetDetailFragment extends StatefulWidget {
 class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
   @override
   Widget build(BuildContext context) {
+    final ThemeData globalLightTheme = Provider.of<GlobalTheme>(context).globalLightTheme;
+    final ThemeData globalDarkTheme = Provider.of<GlobalTheme>(context).globalDarkTheme;
     return MaterialApp(
+      theme: globalLightTheme,
+      darkTheme: globalDarkTheme,
       home: Scaffold(
           appBar: BackableAppBar(
             title: const Text("Details"),
@@ -53,10 +59,10 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
-                  color: const Color.fromARGB(255, 202, 202, 202)
+                  color: Colors.grey[200]
                 ),
                 child: Text(widget.snip.code, style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                   fontFamily: 'Consolas',
                   ))
               ),
@@ -64,7 +70,7 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
-                  color: const Color.fromARGB(255, 202, 202, 202)
+                  color: Colors.white
                 ),
                 padding: const EdgeInsets.all(10),
                 child: Text(widget.snip.description, style: const TextStyle(fontSize: 18.0,height: 1.5),

@@ -1,18 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:snipdaily/widgets/BackableAppBar.dart';
 import 'package:snipdaily/widgets/InputTextField.dart';
 
 import '../HomeScreen.dart';
+import '../assets/GlobalTheme.dart';
 
 var db = FirebaseFirestore.instance;
+
 class SnippetExtraDataFragment extends StatefulWidget {
   final String language;
   final String format;
   final String type;
 
   const SnippetExtraDataFragment(
-      {Key? key, required this.language, required this.format, required this.type})
+      {Key? key,
+      required this.language,
+      required this.format,
+      required this.type})
       : super(key: key);
 
   @override
@@ -21,7 +27,6 @@ class SnippetExtraDataFragment extends StatefulWidget {
 }
 
 class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
-
   final snippetController = TextEditingController();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -30,9 +35,9 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
   Widget getFormatWidget() {
     if (widget.format == "Text") {
       return InputTextField(
-        maxLines: 6, 
-        hintText: "Your Code Snippet",
-        getTextController: snippetController);
+          maxLines: 6,
+          hintText: "Your Code Snippet",
+          getTextController: snippetController);
     } else if (widget.format == "Image") {
       return Container(
           margin: const EdgeInsets.all(20),
@@ -45,7 +50,9 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
   }
 
   void checkInput() {
-    if (snippetController.text == "" || titleController.text == "" || descriptionController.text == "") {
+    if (snippetController.text == "" ||
+        titleController.text == "" ||
+        descriptionController.text == "") {
       showDialog(
         context: context,
         builder: (context) {
@@ -54,26 +61,33 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
           );
         },
       );
-    }
-    else {
-      final snippet = <String, dynamic> {
+    } else {
+      final snippet = <String, dynamic>{
         "code": snippetController.text,
         "language": widget.language,
         "formatType": widget.format,
         "title": titleController.text,
         "description": descriptionController.text,
-        "type" : widget.type,
+        "type": widget.type,
       };
-      db.collection("snippets").add(snippet).then((DocumentReference doc) => print("DocumentSnapshot added with ID: ${doc.id}"));
+      db.collection("snippets").add(snippet).then((DocumentReference doc) =>
+          print("DocumentSnapshot added with ID: ${doc.id}"));
       Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen(isAdmin: false)));
+          context,
+          MaterialPageRoute(
+              builder: (context) => const HomeScreen(isAdmin: false)));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData globalLightTheme =
+        Provider.of<GlobalTheme>(context).globalLightTheme;
+    final ThemeData globalDarkTheme =
+        Provider.of<GlobalTheme>(context).globalDarkTheme;
     return MaterialApp(
+        theme: globalLightTheme,
+        darkTheme: globalDarkTheme,
         home: Scaffold(
             appBar: BackableAppBar(
               title: const Text("Tell us more about your snippet!"),
@@ -102,9 +116,9 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
                     ),
                   ),
                   InputTextField(
-                    maxLines: 1, 
-                    hintText: "Title",
-                    getTextController: titleController),
+                      maxLines: 1,
+                      hintText: "Title",
+                      getTextController: titleController),
                   Container(
                     margin: const EdgeInsets.only(top: 20, bottom: 20),
                     child: Text(
@@ -113,9 +127,9 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
                     ),
                   ),
                   InputTextField(
-                    maxLines: 6, 
-                    hintText: "Description",
-                    getTextController: descriptionController),
+                      maxLines: 6,
+                      hintText: "Description",
+                      getTextController: descriptionController),
                   Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.all(20),

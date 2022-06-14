@@ -1,6 +1,9 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:snipdaily/HomeScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:snipdaily/assets/GlobalTheme.dart';
 import 'firebase_options.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,7 +14,16 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( const Login());
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<GlobalTheme>(
+          create: (context) => GlobalTheme(),
+        )
+      ],
+      child: const Login()
+      )
+  );
 }
 
 class Login extends StatelessWidget {

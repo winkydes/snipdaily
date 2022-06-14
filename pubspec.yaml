@@ -29,6 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flex_color_scheme: ^5.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -96,3 +97,6 @@ flutter:
     - family: Consolas
       fonts:
         - asset: lib/assets/fonts/CONSOLA.ttf
+    - family: CharisSIL-Regular
+      fonts: 
+        - asset: lib/assets/fonts/CharisSIL-Regular.ttf

@@ -25,7 +25,6 @@ class BackableAppBar extends StatelessWidget with PreferredSizeWidget {
           title,
         ],
       ),
-      backgroundColor: const Color.fromARGB(255, 174, 123, 241),
       actions: widgets,
     );
   }
