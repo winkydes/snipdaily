@@ -39,19 +39,8 @@ class _SnippetListFragmentState extends State<SnippetListFragment> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData globalLightTheme =
-        Provider.of<GlobalTheme>(context).globalLightTheme;
-    final ThemeData globalDarkTheme =
-        Provider.of<GlobalTheme>(context).globalDarkTheme;
-    return MaterialApp(
-      theme: globalLightTheme,
-      darkTheme: globalDarkTheme,
-      home: Scaffold(
-        appBar: BackableAppBar(
-            title: Text(widget.type),
-            appBar: AppBar(),
-            widgets: [],
-            pageContext: context),
+    return Scaffold(
+        appBar: AppBar(title: Text(widget.type)),
         body: StreamBuilder<Iterable<Snippet>>(
             stream: _snippetStream,
             builder: (context, snapshot) {
@@ -78,7 +67,7 @@ class _SnippetListFragmentState extends State<SnippetListFragment> {
                       left: 30, right: 30, top: 30, bottom: 30),
                   children: snippetList);
             }),
-      ),
+      
     );
   }
 }

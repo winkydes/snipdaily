@@ -20,18 +20,8 @@ class SnippetDetailFragment extends StatefulWidget {
 class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
   @override
   Widget build(BuildContext context) {
-    final ThemeData globalLightTheme = Provider.of<GlobalTheme>(context).globalLightTheme;
-    final ThemeData globalDarkTheme = Provider.of<GlobalTheme>(context).globalDarkTheme;
-    return MaterialApp(
-      theme: globalLightTheme,
-      darkTheme: globalDarkTheme,
-      home: Scaffold(
-          appBar: BackableAppBar(
-            title: const Text("Details"),
-            appBar: AppBar(),
-            widgets: const [],
-            pageContext: context,
-          ),
+    return Scaffold(
+          appBar: AppBar(title: const Text("Details")),
           body: ListView(
             padding:
                 const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
@@ -77,7 +67,7 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                 )
               )
             ],
-          )),
+          )
     );
   }
 }
