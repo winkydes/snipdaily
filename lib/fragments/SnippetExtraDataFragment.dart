@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snipdaily/widgets/BackableAppBar.dart';
@@ -69,6 +70,7 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
         "title": titleController.text,
         "description": descriptionController.text,
         "type": widget.type,
+        "author": FirebaseAuth.instance.currentUser!.displayName
       };
       db.collection("snippets").add(snippet).then((DocumentReference doc) =>
           print("DocumentSnapshot added with ID: ${doc.id}"));

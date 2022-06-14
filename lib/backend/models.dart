@@ -8,8 +8,9 @@ class Snippet {
   final String language;
   final String formatType;
   final String type;
+  final String author;
 
-  Snippet({required this.id, required this.code, required this.title, required this.description, required this.language, required this.formatType, required this.type});
+  Snippet({required this.id, required this.code, required this.title, required this.description, required this.language, required this.formatType, required this.type, required this.author});
 
   factory Snippet.fromSnapshot(DocumentSnapshot snapshot) {
     
@@ -21,6 +22,7 @@ class Snippet {
       language: snapshot['language'] ?? '',
       formatType: snapshot['formatType'] ?? '',
       type: snapshot['type'] ?? '',
+      author: snapshot['author'] ?? '',
     );
   }
 }

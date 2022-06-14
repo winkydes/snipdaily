@@ -27,13 +27,19 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                 const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
             children: [
               // title container
+              Text(
+                widget.snip.title,
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              // author container
               Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                child: 
+                alignment: Alignment.centerRight,
+                margin: const EdgeInsets.only(right: 10, bottom: 10),
+                child:
                   Text(
-                    widget.snip.title,
-                    style: Theme.of(context).textTheme.headline5,
-                  ),
+                    "-- by ${widget.snip.author}",
+                    style: Theme.of(context).textTheme.bodySmall
+                  )
               ),
               // label container
               Row(
