@@ -8,9 +8,9 @@ class Snippet {
   final String language;
   final String formatType;
   final String type;
-  final String author;
+  final String authorId;
 
-  Snippet({required this.id, required this.code, required this.title, required this.description, required this.language, required this.formatType, required this.type, required this.author});
+  Snippet({required this.id, required this.code, required this.title, required this.description, required this.language, required this.formatType, required this.type, required this.authorId});
 
   factory Snippet.fromSnapshot(DocumentSnapshot snapshot) {
     
@@ -22,7 +22,23 @@ class Snippet {
       language: snapshot['language'] ?? '',
       formatType: snapshot['formatType'] ?? '',
       type: snapshot['type'] ?? '',
-      author: snapshot['author'] ?? '',
+      authorId: snapshot['authorId'] ?? '',
+    );
+  }
+}
+
+class User {
+  final String uid;
+  final String displayName;
+  final bool isLogin;
+
+  User({required this.uid, required this.displayName, required this.isLogin});
+
+  factory User.fromSnapshot(DocumentSnapshot snapshot) {
+    return User(
+      uid: snapshot['uid'] ?? '',
+      displayName: snapshot['displayName'] ?? '',
+      isLogin: snapshot['isLogin'] ?? '',
     );
   }
 }
