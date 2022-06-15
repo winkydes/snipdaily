@@ -1,10 +1,8 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snipdaily/fragments/AddSnippetFragment.dart';
 import 'package:snipdaily/fragments/ProfileFragment.dart';
 import 'package:snipdaily/fragments/AskFragment.dart';
-import 'package:snipdaily/fragments/SnippetListFragment.dart';
 import 'package:snipdaily/fragments/CommunityFragment.dart';
 import 'package:snipdaily/fragments/SettingsFragment.dart';
 
@@ -29,6 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
     const AskFragment(),
     const ProfileFragment(),
   ];
+
+  var widgetTitle = ["Home", "Community", "Add Snippet", "Ask", "Profile"];
 
   void onItemTapped(int index) {
     setState(() {
@@ -114,8 +114,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ));
     }
   }
-
-  var widgetTitle = ["Home", "Community", "Add Snippet", "Ask", "Profile"];
 
   @override
   void initState() {
