@@ -14,25 +14,41 @@ class SnippetDetailFragment extends StatefulWidget {
 }
 
 class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
+
+  double customFontSize = 15;
+
+  resize(bool larger) {
+    if (larger && customFontSize < 30) {
+      setState(() {
+        customFontSize = customFontSize + 5;
+      });
+    }
+    else if (!larger && customFontSize > 10) {
+      setState(() {
+        customFontSize = customFontSize - 5;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('Users')
-            .where("uid", isEqualTo: widget.snip.authorId)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            var author = snapshot.data!.docs.first['displayName'];
-            return Scaffold(
-              appBar: AppBar(title: const Text("Details")),
-              body: ListView(
-                padding: const EdgeInsets.only(
-                    left: 20, right: 20, top: 20, bottom: 20),
+      stream: FirebaseFirestore.instance
+        .collection('Users')
+        .where("uid", isEqualTo: widget.snip.authorId)
+        .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          var author = snapshot.data!.docs.first['displayName'];
+          return Scaffold(
+            appBar: AppBar(title: const Text("Details")),
+            body: ListView(
+              padding: const EdgeInsets.only(
+                left: 20, right: 20, top: 20, bottom: 20),
                 children: [
                   // title container
                   Text(
@@ -41,42 +57,69 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                   ),
                   // author container
                   Container(
-                      alignment: Alignment.centerRight,
-                      margin: const EdgeInsets.only(right: 10, bottom: 10),
-                      child: Text("-- by $author",
-                          style: Theme.of(context).textTheme.bodySmall)),
+                    alignment: Alignment.centerRight,
+                    margin: const EdgeInsets.only(right: 10, bottom: 10),
+                    child: Text("-- by $author", style: Theme.of(context).textTheme.bodySmall)),
                   // label container
                   Row(children: <Widget>[
                     LanguageLabel(language: widget.snip.language),
                     TypeLabel(type: widget.snip.type),
                   ]),
-
                   // code container
                   Container(
-                      margin: const EdgeInsets.only(top: 10, bottom: 10),
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          color: Colors.grey[200]),
-                      child: Text(widget.snip.code,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontFamily: 'Consolas',
-                          ))),
+                    margin: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        color: Colors.grey[200]),
+                    child: Text(widget.snip.code,
+                        style: TextStyle(
+                          fontSize: customFontSize,
+                          fontFamily: 'Consolas',
+                        ))),
+                  // control font size button
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Ink(
+                            decoration: ShapeDecoration(
+                              shape: const CircleBorder(),
+                              color: Colors.grey[200]),
+                            child: InkWell(
+                              onTap: () {
+                                resize(false);
+                              },
+                              child: const Icon(Icons.remove, size: 36))),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Ink(
+                            decoration: ShapeDecoration(
+                              shape: const CircleBorder(),
+                              color: Colors.grey[200]),
+                            child: InkWell(
+                              onTap: () {
+                                resize(true);
+                              },
+                              child: const Icon(Icons.add, size: 36))),
+                      ),
+                    ],
+                  ),
                   // description container
                   Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          color: Colors.white),
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        widget.snip.description,
-                        style: const TextStyle(fontSize: 18.0, height: 1.5),
-                      ))
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                      color: Colors.white),
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      widget.snip.description,
+                      style: const TextStyle(fontSize: 18.0, height: 1.5),
+                    ))
                 ],
-              ));
+            ));
           }
-          
         });
   }
 }

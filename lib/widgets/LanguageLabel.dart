@@ -22,7 +22,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
         return Wrap(children: [
           Container(
               margin: const EdgeInsets.only(left: 5, right: 5),
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.only(left:10, right: 10, top: 5, bottom: 5),
               decoration: containerDec(Colors.blue[300]!),
               child: const Text('C++')),
         ]);
@@ -30,7 +30,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
         return Wrap(children: [
           Container(
               margin: const EdgeInsets.only(left: 5, right: 5),
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.only(left:10, right: 10, top: 5, bottom: 5),
               decoration: containerDec(Colors.yellow[300]!),
               child: const Text('JavaScript')),
         ]);
@@ -38,7 +38,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
         return Wrap(children: [
           Container(
               margin: const EdgeInsets.only(left: 5, right: 5),
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.only(left:10, right: 10, top: 5, bottom: 5),
               decoration: containerDec(Colors.green[300]!),
               child: const Text('Python')),
         ]);
@@ -47,7 +47,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
           return Wrap(children: [
             Container(
                 margin: const EdgeInsets.only(left: 5, right: 5),
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.only(left:10, right: 10, top: 5, bottom: 5),
                 decoration: containerDec(Colors.white),
                 child: const Text('Error')),
           ]);
