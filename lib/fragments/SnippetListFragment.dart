@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:snipdaily/assets/constants.dart';
 import 'package:snipdaily/widgets/SnippetCardView.dart';
 import '../backend/models.dart';
 
@@ -17,6 +18,7 @@ class _SnippetListFragmentState extends State<SnippetListFragment> {
       .instance
       .collection('snippets')
       .where("type", isEqualTo: widget.type)
+      .where("verified", isEqualTo: VERIFIED)
       .snapshots()
       .map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
 

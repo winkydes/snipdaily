@@ -10,8 +10,7 @@ import 'assets/GlobalTheme.dart';
 import 'fragments/ExploreFragment.dart';
 
 class HomeScreen extends StatefulWidget {
-  final bool isAdmin;
-  const HomeScreen({Key? key, required this.isAdmin}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -37,8 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   AppBar customAppbar() {
-    if ((widget.isAdmin && selectedIndex == 4) ||
-        (!widget.isAdmin && selectedIndex == 3)) {
+    if (selectedIndex == 4) {
       return AppBar(
         title: Text(widgetTitle.elementAt(selectedIndex)),
         actions: <Widget>[
@@ -64,7 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   BottomNavigationBar customBottomNavigationBar() {
-    if (widget.isAdmin) {
       return (BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const [
@@ -77,33 +74,13 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Community',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Contribute',
+              icon: Icon(Icons.add),
+              label: 'Contribute'
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.question_mark), label: 'Ask'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Account',
+              icon: Icon(Icons.question_mark),
+              label: 'Ask'
           ),
-        ],
-        currentIndex: selectedIndex,
-        onTap: onItemTapped,
-      ));
-    } else {
-      return (BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Explore',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.groups),
-            label: 'Community',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.question_mark), label: 'Ask'),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: 'Account',
@@ -113,23 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: onItemTapped,
       ));
     }
-  }
-
-  @override
-  void initState() {
-    if (!widget.isAdmin) {
-      setState(() {
-        widgetOptions = [
-          const ExploreFragment(),
-          const CommunityFragment(),
-          const AskFragment(),
-          const ProfileFragment(),
-        ];
-        widgetTitle = ["Home", "Community", "Ask", "Profile"];
-      });
-    }
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

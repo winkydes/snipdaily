@@ -97,9 +97,9 @@ class _LoginWidgetState extends State<LoginWidget> {
           }
           // this email can later be change to any admin email
           else if (snapshot.data?.email == "keithlam0110@gmail.com") {
-            return const HomeScreen(isAdmin: true);
+            return const HomeScreen();
           }
-          return const HomeScreen(isAdmin: false);
+          return const HomeScreen();
         },
       );
   }

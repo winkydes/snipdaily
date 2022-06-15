@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:snipdaily/assets/constants.dart';
 import 'package:snipdaily/widgets/BackableAppBar.dart';
 import 'package:snipdaily/widgets/InputTextField.dart';
 
@@ -70,14 +71,15 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
         "title": titleController.text,
         "description": descriptionController.text,
         "type": widget.type,
-        "author": FirebaseAuth.instance.currentUser!.uid
+        "authorId": FirebaseAuth.instance.currentUser!.uid,
+        "verified": NOT_VERIFIED,
       };
       db.collection("snippets").add(snippet).then((DocumentReference doc) =>
           print("DocumentSnapshot added with ID: ${doc.id}"));
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const HomeScreen(isAdmin: true)));
+              builder: (context) => const HomeScreen()));
     }
   }
 
