@@ -8,6 +8,8 @@ import 'firebase_options.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'fragments/adminFragments/AdminHomeFragment.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -97,7 +99,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           }
           // this email can later be change to any admin email
           else if (snapshot.data?.email == "keithlam0110@gmail.com") {
-            return const HomeScreen();
+            return const AdminHomeFragment();
           }
           return const HomeScreen();
         },
