@@ -61,13 +61,50 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                     margin: const EdgeInsets.only(right: 10, bottom: 10),
                     child: Text("-- by $author", style: Theme.of(context).textTheme.bodySmall)),
                   // label container
-                  Row(children: <Widget>[
-                    LanguageLabel(language: widget.snip.language),
-                    TypeLabel(type: widget.snip.type),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        LanguageLabel(language: widget.snip.language),
+                        TypeLabel(type: widget.snip.type),
+                      ],
+                    ),
+                    // control font size button
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                          margin: const EdgeInsets.all(5),
+                          child: Ink(
+                              decoration: ShapeDecoration(
+                                shape: const CircleBorder(),
+                                color: Colors.grey[200]),
+                              child: InkWell(
+                                onTap: () {
+                                  resize(false);
+                                },
+                                child: const Icon(Icons.remove, size: 36))),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.all(5),
+                          child: Ink(
+                              decoration: ShapeDecoration(
+                                shape: const CircleBorder(),
+                                color: Colors.grey[200]),
+                              child: InkWell(
+                                onTap: () {
+                                  resize(true);
+                                },
+                                child: const Icon(Icons.add, size: 36))),
+                        ),
+                      ],
+                    ),
                   ]),
                   // code container
                   Container(
-                    margin: const EdgeInsets.only(top: 10),
+                    margin: const EdgeInsets.only(top: 10, bottom: 20),
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.0),
@@ -77,36 +114,6 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                           fontSize: customFontSize,
                           fontFamily: 'Consolas',
                         ))),
-                  // control font size button
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(10),
-                        child: Ink(
-                            decoration: ShapeDecoration(
-                              shape: const CircleBorder(),
-                              color: Colors.grey[200]),
-                            child: InkWell(
-                              onTap: () {
-                                resize(false);
-                              },
-                              child: const Icon(Icons.remove, size: 36))),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(10),
-                        child: Ink(
-                            decoration: ShapeDecoration(
-                              shape: const CircleBorder(),
-                              color: Colors.grey[200]),
-                            child: InkWell(
-                              onTap: () {
-                                resize(true);
-                              },
-                              child: const Icon(Icons.add, size: 36))),
-                      ),
-                    ],
-                  ),
                   // description container
                   Container(
                     decoration: BoxDecoration(
@@ -116,7 +123,26 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                     child: Text(
                       widget.snip.description,
                       style: const TextStyle(fontSize: 18.0, height: 1.5),
-                    ))
+                    )),
+                  
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          "Do you find this snippet useful?",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        )
+                      ),
+                      Row(
+                        children: [
+                          IconButton(onPressed: () {}, icon: const Icon(Icons.thumb_up, size: 36, color: Colors.green,)),
+                          IconButton(onPressed: () {}, icon: const Icon(Icons.thumb_down, size: 36, color: Colors.red,)),
+                        ],
+                      )
+                    ],
+                  )
                 ],
             ));
           }
