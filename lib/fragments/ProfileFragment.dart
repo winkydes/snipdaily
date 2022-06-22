@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:snipdaily/fragments/SettingsFragment.dart';
 
 class ProfileFragment extends StatefulWidget {
   const ProfileFragment({Key? key}) : super(key: key);
@@ -21,6 +22,10 @@ class _ProfileFragmentState extends State<ProfileFragment> {
         TextButton(
           onPressed: () {_signOut();}, 
           child: const Text("Sign Out"),
+        ),
+        TextButton(
+          onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsFragment()));},
+          child: const Text("Settings")
         )
       ],
     );

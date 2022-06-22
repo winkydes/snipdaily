@@ -35,32 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  AppBar customAppbar() {
-    if (selectedIndex == 4) {
-      return AppBar(
-        title: Text(widgetTitle.elementAt(selectedIndex)),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SettingsFragment()));
-            },
-          )
-        ],
-      );
-    } else {
-      return AppBar(
-        title: Text(widgetTitle.elementAt(selectedIndex)),
-      );
-    }
-  }
-
   BottomNavigationBar customBottomNavigationBar() {
       return (BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -100,7 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
       darkTheme: globalDarkTheme,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: customAppbar(),
+        appBar: AppBar(
+          title: Text(widgetTitle.elementAt(selectedIndex)),
+        ),
         body: Center(
           child: widgetOptions.elementAt(selectedIndex),
         ),

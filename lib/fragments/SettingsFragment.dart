@@ -10,13 +10,8 @@ class SettingsFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData globalLightTheme = Provider.of<GlobalTheme>(context).globalLightTheme;
-    final ThemeData globalDarkTheme = Provider.of<GlobalTheme>(context).globalDarkTheme;
-    return MaterialApp(
-      theme: globalLightTheme,
-      darkTheme: globalDarkTheme,
-      home: Scaffold(
-        appBar: BackableAppBar(title: const Text("Settings"), appBar: AppBar(), widgets: [], pageContext: context),
+    return Scaffold(
+        appBar: AppBar(title: const Text("Settings"),),
         body: ListView(
           padding: const EdgeInsets.all(20),
           children: [
@@ -27,7 +22,6 @@ class SettingsFragment extends StatelessWidget {
             SettingsItemWidget(name: "Contact us", onTapAction: () {},),
           ],
         ),
-      ),
     );
   }
 }
