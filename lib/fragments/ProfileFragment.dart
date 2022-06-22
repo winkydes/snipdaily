@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/auth.dart';
 
 class ProfileFragment extends StatefulWidget {
   const ProfileFragment({Key? key}) : super(key: key);
@@ -11,11 +10,13 @@ class ProfileFragment extends StatefulWidget {
 class _ProfileFragmentState extends State<ProfileFragment> {
   @override
   Widget build(BuildContext context) {
-    return const ProfileScreen(
-      providerConfigs:[
-        EmailProviderConfiguration(),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Center(
+          child: Text("This is profile screen"),
+        ),
       ],
-      avatarSize: 100,
     );
   }
 }

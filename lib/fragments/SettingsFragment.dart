@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:snipdaily/fragments/settingsFragments/AccountFragment.dart';
 import 'package:snipdaily/widgets/BackableAppBar.dart';
 import 'package:snipdaily/widgets/SettingsItemWidget.dart';
 
@@ -19,11 +20,12 @@ class SettingsFragment extends StatelessWidget {
         appBar: BackableAppBar(title: const Text("Settings"), appBar: AppBar(), widgets: [], pageContext: context),
         body: ListView(
           padding: const EdgeInsets.all(20),
-          children:const [
-            SettingsItemWidget(name: "Light/Dark mode"),
-            SettingsItemWidget(name: "Change Preference"),
-            SettingsItemWidget(name: "Change Your Password"),
-            SettingsItemWidget(name: "Contact us"),
+          children: [
+            SettingsItemWidget(name: "Account Settings", onTapAction: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const AccountFragment()));},),
+            SettingsItemWidget(name: "Light/Dark mode", onTapAction: () {},),
+            SettingsItemWidget(name: "Change Preference", onTapAction: () {},),
+            SettingsItemWidget(name: "Change Your Password", onTapAction: () {},),
+            SettingsItemWidget(name: "Contact us", onTapAction: () {},),
           ],
         ),
       ),
