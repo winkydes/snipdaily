@@ -29,15 +29,15 @@ class Snippet {
   }
 }
 
-class User {
+class UserPref {
   final String uid;
   final String displayName;
   final bool isLogin;
 
-  User({required this.uid, required this.displayName, required this.isLogin});
+  UserPref({required this.uid, required this.displayName, required this.isLogin});
 
-  factory User.fromSnapshot(DocumentSnapshot snapshot) {
-    return User(
+  factory UserPref.fromSnapshot(DocumentSnapshot snapshot) {
+    return UserPref(
       uid: snapshot.data().toString().contains('uid') ? snapshot.get('uid') : '',
       displayName: snapshot.data().toString().contains('displayName') ? snapshot.get('displayName') : '',
       isLogin: snapshot.data().toString().contains('isLogin') ? snapshot.get('isLogin') : '',

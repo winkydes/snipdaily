@@ -163,7 +163,7 @@ class _AdminSnippetDetailFragmentState extends State<AdminSnippetDetailFragment>
                               onTap: () {
                                 verifySnippet(false, widget.snip.id);
                               },
-                              child: const Icon(Icons.cancel, size: 36))),
+                              child: const Icon(Icons.close, size: 36))),
                       ),
                     ],
                   ),

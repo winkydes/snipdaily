@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../backend/models.dart';
 import '../fragments/SnippetDetailFragment.dart';
 

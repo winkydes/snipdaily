@@ -4,7 +4,6 @@ import 'package:snipdaily/fragments/AddSnippetFragment.dart';
 import 'package:snipdaily/fragments/ProfileFragment.dart';
 import 'package:snipdaily/fragments/AskFragment.dart';
 import 'package:snipdaily/fragments/CommunityFragment.dart';
-import 'package:snipdaily/fragments/SettingsFragment.dart';
 
 import 'assets/GlobalTheme.dart';
 import 'fragments/ExploreFragment.dart';
