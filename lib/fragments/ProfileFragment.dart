@@ -111,10 +111,6 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                     onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsFragment()));},
                     child: const Text("Settings")
                   ),
-                  TextButton(
-                    onPressed: () {print(userUid);}, 
-                    child: const Text("Test"),
-                  ),
                 ],
               ),
             ],

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../backend/models.dart';
+import '../fragments/FullContributionListFragment.dart';
 import 'ProfileSnippetCardView.dart';
 
 class RecentContributionSummaryBox extends StatefulWidget {
@@ -23,6 +24,14 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
       .map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
 
   late final List<Widget> snippetList = [];
+
+  List<Widget> snippetSubList(List<Widget> list) {
+    if (list.length < 3) {
+      return list;
+    } else {
+      return list.sublist(0, 3);
+    }
+  }
 
   // initialize snippetList for rendering in screen
   @override
@@ -58,11 +67,23 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
             ),
           );
         }
-        return Container(
-          margin: const EdgeInsets.only(left: 20, right: 20),
-          child: Column(
-            children: snippetList,
-          ),
+        return Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              child: Column(
+                children: snippetSubList(snippetList),
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerRight,
+              margin: const EdgeInsets.only(right: 30),
+              child: TextButton(
+                onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => FullContributionListFragment(fullList: snippetList))); },
+                child: const Text("See more",)
+              )
+            )
+          ],
         );
       }
     );
