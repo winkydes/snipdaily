@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snipdaily/assets/constants.dart';
 import '../backend/models.dart';
-import '../fragments/SnippetDetailFragment.dart';
+import '../fragments/PersonalSnippetDetailFragment.dart';
 
 class ProfileSnippetCardView extends StatefulWidget {
 
@@ -36,7 +36,7 @@ class _ProfileSnippetCardViewState extends State<ProfileSnippetCardView> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SnippetDetailFragment(snip: widget.cardSnippet)))
+        Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalSnippetDetailFragment(snip: widget.cardSnippet)))
       },
       child: Card(
         child:Padding(
