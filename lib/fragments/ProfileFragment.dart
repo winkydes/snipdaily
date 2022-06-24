@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:flutterfire_ui/auth.dart';
+import 'package:snipdaily/assets/constants.dart';
 import 'package:snipdaily/backend/models.dart';
 import 'package:snipdaily/fragments/SettingsFragment.dart';
 import 'package:snipdaily/widgets/RecentContributionSummaryBox.dart';
@@ -18,21 +19,14 @@ class _ProfileFragmentState extends State<ProfileFragment> {
   var db = FirebaseFirestore.instance;
   var currentUser = FirebaseAuth.instance.currentUser!;
   late final Stream<UserPref> userStream = db.collection("Users").where("uid", isEqualTo: currentUser.uid).snapshots().map((item) => UserPref.fromSnapshot(item.docs.first));
+  late final snipData = db.collection("snippets").where("authorId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).where("verified", isEqualTo: VERIFIED);
   late var userDisplayName = '';
   late var userUid = '';
-  final displayNameEditingController = TextEditingController();
 
   Future<void> _signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is removed from the
-    // widget tree.
-    displayNameEditingController.dispose();
-    super.dispose();
-  }
   @override
   void initState() {
     userStream.forEach((element) {
@@ -66,14 +60,27 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: _screen.width * 0.30,
-                      child: Column(
-                        children: const [
-                          Text("12", style: TextStyle(fontSize: 30)),
-                          Text("Contributions Verified", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
-                        ],
-                      ),
+                    FutureBuilder<int>(
+                      future: snipData.get().then((value) => value.size),
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.waiting: return const Text('Loading....');
+                          default:
+                            if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            } else {
+                              return SizedBox(
+                              width: _screen.width * 0.30,
+                              child: Column(
+                                children: [
+                                  Text(snapshot.data.toString(), style: const TextStyle(fontSize: 30)),
+                                  const Text("Contributions Verified", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
+                                ],
+                              ),
+                            );
+                            }
+                          }
+                        }
                     ),
                     SizedBox(
                       width: _screen.width * 0.30,
