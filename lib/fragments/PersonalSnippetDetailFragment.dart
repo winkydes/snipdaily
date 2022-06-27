@@ -79,24 +79,26 @@ class _PersonalSnippetDetailFragmentState extends State<PersonalSnippetDetailFra
                     margin: const EdgeInsets.only(right: 10, bottom: 10),
                     child: Text("-- by $author", style: Theme.of(context).textTheme.bodySmall)),
                   // status container
-                  Container(
-                    margin: const EdgeInsets.only(left: 5, right: 5, bottom: 10),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(16.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        const Text("Status:"),
-                        Row(
-                          children: [
-                            Text(widget.snip.verified.toUpperCase()),
-                            verfiedIcon(widget.snip.verified),
-                          ],
-                        )
-                      ],
+                  Card(
+                    margin: const EdgeInsets.only(bottom: 5),
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          const Text("Status:"),
+                          Row(
+                            children: [
+                              Text(widget.snip.verified.toUpperCase()),
+                              verfiedIcon(widget.snip.verified),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   // label container
@@ -124,7 +126,7 @@ class _PersonalSnippetDetailFragmentState extends State<PersonalSnippetDetailFra
                                 onTap: () {
                                   resize(false);
                                 },
-                                child: const Icon(Icons.remove, size: 36))),
+                                child: const Icon(Icons.remove, size: 36, color: Colors.black,))),
                         ),
                         Container(
                           margin: const EdgeInsets.all(5),
@@ -136,33 +138,37 @@ class _PersonalSnippetDetailFragmentState extends State<PersonalSnippetDetailFra
                                 onTap: () {
                                   resize(true);
                                 },
-                                child: const Icon(Icons.add, size: 36))),
+                                child: const Icon(Icons.add, size: 36, color: Colors.black,))),
                         ),
                       ],
                     ),
                   ]),
                   // code container
-                  Container(
-                    margin: const EdgeInsets.only(top: 10, bottom: 20),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                        color: Colors.grey[200]),
-                    child: Text(widget.snip.code,
-                        style: TextStyle(
-                          fontSize: customFontSize,
-                          fontFamily: 'Consolas',
-                        ))),
+                  Card(
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 10, bottom: 20),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Text(widget.snip.code,
+                          style: TextStyle(
+                            fontSize: customFontSize,
+                            fontFamily: 'Consolas',
+                          ))),
+                  ),
                   // description container
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: Colors.white),
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                      widget.snip.description,
-                      style: const TextStyle(fontSize: 18.0, height: 1.5),
-                    )),
+                  Card(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        widget.snip.description,
+                        style: const TextStyle(fontSize: 18.0, height: 1.5),
+                      )),
+                  ),
                 ],
             ));
           }

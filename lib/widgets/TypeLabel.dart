@@ -23,7 +23,7 @@ class _LanguageLabelState extends State<TypeLabel> {
           margin: const EdgeInsets.only(left: 5, right: 5),
           padding: const EdgeInsets.only(left:10, right: 10, top: 5, bottom: 5),
           decoration: containerDec(Colors.grey[200]!),
-          child: Text(widget.type)),
+          child: Text(widget.type, style: const TextStyle(color: Colors.black))),
     ]);
   }
 }

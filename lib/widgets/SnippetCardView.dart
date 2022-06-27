@@ -21,7 +21,6 @@ class SnippetCardView extends StatelessWidget {
               title: Text(cardSnippet.title),
               subtitle: Text(
                 cardSnippet.language,
-                style: TextStyle(color: Colors.black.withOpacity(0.6)),
               ),
             ),
           ],

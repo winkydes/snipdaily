@@ -24,7 +24,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
               margin: const EdgeInsets.only(left: 5, right: 5),
               padding: const EdgeInsets.only(left:10, right: 10, top: 5, bottom: 5),
               decoration: containerDec(Colors.blue[300]!),
-              child: const Text('C++')),
+              child: const Text('C++', style: TextStyle(color: Colors.black))),
         ]);
       case 'JavaScript':
         return Wrap(children: [
@@ -32,7 +32,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
               margin: const EdgeInsets.only(left: 5, right: 5),
               padding: const EdgeInsets.only(left:10, right: 10, top: 5, bottom: 5),
               decoration: containerDec(Colors.yellow[300]!),
-              child: const Text('JavaScript')),
+              child: const Text('JavaScript', style: TextStyle(color: Colors.black))),
         ]);
       case 'Python':
         return Wrap(children: [
@@ -40,7 +40,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
               margin: const EdgeInsets.only(left: 5, right: 5),
               padding: const EdgeInsets.only(left:10, right: 10, top: 5, bottom: 5),
               decoration: containerDec(Colors.green[300]!),
-              child: const Text('Python')),
+              child: const Text('Python', style: TextStyle(color: Colors.black))),
         ]);
       default:
         {
@@ -49,7 +49,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
                 margin: const EdgeInsets.only(left: 5, right: 5),
                 padding: const EdgeInsets.only(left:10, right: 10, top: 5, bottom: 5),
                 decoration: containerDec(Colors.white),
-                child: const Text('Error')),
+                child: const Text('Error', style: TextStyle(color: Colors.black))),
           ]);
         }
     }

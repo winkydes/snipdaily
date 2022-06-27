@@ -55,7 +55,6 @@ class _ProfileSnippetCardViewState extends State<ProfileSnippetCardView> {
                     ),
                     Text(
                       widget.cardSnippet.language,
-                      style: TextStyle(color: Colors.black.withOpacity(0.6)),
                     ),
                   ],
                 ),
