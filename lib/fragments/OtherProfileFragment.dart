@@ -5,11 +5,11 @@ import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:snipdaily/assets/constants.dart';
 import 'package:snipdaily/backend/models.dart';
-import 'package:snipdaily/fragments/SettingsFragment.dart';
 import 'package:snipdaily/widgets/RecentContributionSummaryBox.dart';
 
 class OtherProfileFragment extends StatefulWidget {
-  const OtherProfileFragment({Key? key}) : super(key: key);
+  final String authorId;
+  const OtherProfileFragment({Key? key, required this.authorId}) : super(key: key);
 
   @override
   State<OtherProfileFragment> createState() => _OtherProfileFragmentState();
@@ -18,8 +18,8 @@ class OtherProfileFragment extends StatefulWidget {
 class _OtherProfileFragmentState extends State<OtherProfileFragment> {
   var db = FirebaseFirestore.instance;
   var currentUser = FirebaseAuth.instance.currentUser!;
-  late final Stream<UserPref> userStream = db.collection("Users").where("uid", isEqualTo: currentUser.uid).snapshots().map((item) => UserPref.fromSnapshot(item.docs.first));
-  late final snipData = db.collection("snippets").where("authorId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).where("verified", isEqualTo: VERIFIED);
+  late final Stream<UserPref> userStream = db.collection("Users").where("uid", isEqualTo: widget.authorId).snapshots().map((item) => UserPref.fromSnapshot(item.docs.first));
+  late final snipData = db.collection("snippets").where("authorId", isEqualTo: widget.authorId).where("verified", isEqualTo: VERIFIED);
   late var userDisplayName = '';
   late var userUid = '';
 
@@ -42,7 +42,7 @@ class _OtherProfileFragmentState extends State<OtherProfileFragment> {
       stream: userStream,
       builder: (context, snapshot) {
         return Scaffold(
-          appBar: AppBar(title: const Text("Other's Profile"),),
+          appBar: AppBar(title: Text("$userDisplayName's Profile"),),
           body: ListView(
             children: [
               Container(
@@ -52,8 +52,8 @@ class _OtherProfileFragmentState extends State<OtherProfileFragment> {
               ),
               Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.only(left: 50),
-                child: const EditableUserDisplayName()
+                margin: const EdgeInsets.only(top: 10, bottom: 10),
+                child: Text(userDisplayName, style: const TextStyle(fontSize: 25),),
               ),
               Container(
                 margin: const EdgeInsets.only(left: 5, right: 5),
@@ -108,7 +108,7 @@ class _OtherProfileFragmentState extends State<OtherProfileFragment> {
                 margin: const EdgeInsets.only(top: 20, left: 20),
                 child: const Text("Recent Contributions", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
               ),
-              RecentContributionSummaryBox(targetUid: userUid,),
+              RecentContributionSummaryBox(targetUid: widget.authorId,),
             ],
           ),
         );

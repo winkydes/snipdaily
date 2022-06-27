@@ -19,7 +19,7 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
   late final Stream<Iterable<Snippet>> _snippetStream = FirebaseFirestore
       .instance
       .collection('snippets')
-      .where("authorId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .where("authorId", isEqualTo: widget.targetUid)
       .snapshots()
       .map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
 
@@ -60,9 +60,9 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
           );
         }
         if (snippetList.isEmpty) {
-          return Center(
+          return const Center(
             child: Text(
-              widget.targetUid,
+              "This person did not upload any snippets yet",
               textAlign: TextAlign.center,
             ),
           );
@@ -79,7 +79,9 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
               alignment: Alignment.centerRight,
               margin: const EdgeInsets.only(right: 30),
               child: TextButton(
-                onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => FullContributionListFragment(fullList: snippetList))); },
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => FullContributionListFragment(fullList: snippetList)));
+                },
                 child: const Text("See more",)
               )
             )

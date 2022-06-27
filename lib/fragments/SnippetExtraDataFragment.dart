@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snipdaily/assets/constants.dart';
 import 'package:snipdaily/widgets/InputTextField.dart';
-import '../HomeScreen.dart';
 
 var db = FirebaseFirestore.instance;
 

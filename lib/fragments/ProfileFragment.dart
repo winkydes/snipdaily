@@ -5,7 +5,6 @@ import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:snipdaily/assets/constants.dart';
 import 'package:snipdaily/backend/models.dart';
-import 'package:snipdaily/fragments/SettingsFragment.dart';
 import 'package:snipdaily/widgets/RecentContributionSummaryBox.dart';
 
 class ProfileFragment extends StatefulWidget {
@@ -21,7 +20,6 @@ class _ProfileFragmentState extends State<ProfileFragment> {
   late final Stream<UserPref> userStream = db.collection("Users").where("uid", isEqualTo: currentUser.uid).snapshots().map((item) => UserPref.fromSnapshot(item.docs.first));
   late final snipData = db.collection("snippets").where("authorId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).where("verified", isEqualTo: VERIFIED);
   late var userDisplayName = '';
-  late var userUid = '';
 
   Future<void> _signOut() async {
     await FirebaseAuth.instance.signOut();
@@ -31,7 +29,6 @@ class _ProfileFragmentState extends State<ProfileFragment> {
   void initState() {
     userStream.forEach((element) {
       userDisplayName = element.displayName;
-      userUid = element.uid;
     });
     super.initState();
   }
@@ -107,7 +104,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                 margin: const EdgeInsets.only(top: 20, left: 20),
                 child: const Text("Recent Contributions", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
               ),
-              RecentContributionSummaryBox(targetUid: userUid,),
+              RecentContributionSummaryBox(targetUid: FirebaseAuth.instance.currentUser!.uid,),
               Column(
                 children: <Widget>[
                   TextButton(

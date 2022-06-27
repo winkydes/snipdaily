@@ -61,7 +61,7 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                     alignment: Alignment.centerRight,
                     margin: const EdgeInsets.only(right: 10, bottom: 10),
                     child: GestureDetector(
-                      onTap: () {Navigator.pushNamed(context, '/otherProfile');},
+                      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OtherProfileFragment(authorId: widget.snip.authorId,)));},
                       child: Text("-- by $author", style: Theme.of(context).textTheme.bodyMedium)
                     )
                   ),

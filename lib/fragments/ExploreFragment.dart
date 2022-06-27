@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'SnippetListFragment.dart';
 
 class ExploreFragment extends StatefulWidget {

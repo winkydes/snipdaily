@@ -44,7 +44,6 @@ class Login extends StatelessWidget {
       routes: {
         '/': ((context) => const LoginWidget()),
         '/settings': ((context) => const SettingsFragment()),
-        '/otherProfile': ((context) => const OtherProfileFragment()),
         '/adminHome': ((context) => const AdminHomeFragment()),
       },
     );
