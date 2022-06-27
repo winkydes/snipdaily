@@ -14,8 +14,18 @@ class _FullContributionListFragmentState extends State<FullContributionListFragm
     return Scaffold(
       appBar: AppBar(title: const Text("All contributions")),
       body: ListView(
-        padding: const EdgeInsets.all(30),
-        children: widget.fullList,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 30, left: 35),
+            child: const Text("Sort from newest to oldest")
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left:30, right: 30, bottom: 30),
+            child: Column(
+              children: widget.fullList,
+            ),
+          ),
+        ],
       )
     );
   }

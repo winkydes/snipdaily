@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../backend/models.dart';
 import '../fragments/FullContributionListFragment.dart';
@@ -23,13 +22,21 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
       .snapshots()
       .map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
 
-  late final List<Widget> snippetList = [];
+  late final List<Snippet> snippetList = [];
+  late final List<Widget> snippetWidgetList = [];
 
-  List<Widget> snippetSubList(List<Widget> list) {
+  List<Widget> sortedSnippetSubList(List<Snippet> list) {
+    list.sort((a, b) => b.date.compareTo(a.date));
+    print(list.first.date);
+    for (var snip in list) {
+      snippetWidgetList.add(ProfileSnippetCardView(
+      cardSnippet: snip,
+    ));
+    }
     if (list.length < 3) {
-      return list;
+      return snippetWidgetList;
     } else {
-      return list.sublist(0, 3);
+      return snippetWidgetList.sublist(0, 3);
     }
   }
 
@@ -37,10 +44,8 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
   @override
   void initState() {
     _snippetStream.forEach((element) => {
-          element.forEach((snip) => snippetList.add(ProfileSnippetCardView(
-                cardSnippet: snip,
-              )))
-        });
+      element.forEach((snip) => snippetList.add(snip))
+    });
     super.initState();
   }
 
@@ -72,7 +77,7 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
             Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
-                children: snippetSubList(snippetList),
+                children: sortedSnippetSubList(snippetList),
               ),
             ),
             Container(
@@ -80,7 +85,7 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
               margin: const EdgeInsets.only(right: 30),
               child: TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => FullContributionListFragment(fullList: snippetList)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => FullContributionListFragment(fullList: snippetWidgetList)));
                 },
                 child: const Text("See more",)
               )
