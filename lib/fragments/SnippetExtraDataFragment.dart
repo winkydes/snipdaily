@@ -68,6 +68,7 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
         "type": widget.type,
         "authorId": FirebaseAuth.instance.currentUser!.uid,
         "verified": NOT_VERIFIED,
+        "date": DateTime.now().toString(),
       };
       db.collection("snippets").add(snippet).then((DocumentReference doc) =>
           print("DocumentSnapshot added with ID: ${doc.id}"));

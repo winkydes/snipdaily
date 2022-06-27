@@ -10,8 +10,9 @@ class Snippet {
   final String type;
   final String authorId;
   final String verified;
+  final DateTime date;
 
-  Snippet({required this.id, required this.code, required this.title, required this.description, required this.language, required this.formatType, required this.type, required this.authorId, required this.verified});
+  Snippet({required this.id, required this.code, required this.title, required this.description, required this.language, required this.formatType, required this.type, required this.authorId, required this.verified, required this.date});
 
   factory Snippet.fromSnapshot(DocumentSnapshot snapshot) {
     
@@ -25,6 +26,7 @@ class Snippet {
       type: snapshot.data().toString().contains('type') ? snapshot.get('type') : '',
       authorId: snapshot.data().toString().contains('authorId') ? snapshot.get('authorId') : '',
       verified: snapshot.data().toString().contains('verified') ? snapshot.get('verified') : '',
+      date: snapshot.data().toString().contains('date') ? snapshot.get('date').toDate() : DateTime.parse('0000-00-00 00:00:00Z'),
     );
   }
 }
