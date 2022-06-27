@@ -1,13 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:snipdaily/assets/constants.dart';
-import 'package:snipdaily/widgets/BackableAppBar.dart';
 import 'package:snipdaily/widgets/InputTextField.dart';
-
 import '../HomeScreen.dart';
-import '../assets/GlobalTheme.dart';
 
 var db = FirebaseFirestore.instance;
 
@@ -76,73 +72,58 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
       };
       db.collection("snippets").add(snippet).then((DocumentReference doc) =>
           print("DocumentSnapshot added with ID: ${doc.id}"));
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const HomeScreen()));
+      Navigator.pushNamed(context, '/');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData globalLightTheme =
-        Provider.of<GlobalTheme>(context).globalLightTheme;
-    final ThemeData globalDarkTheme =
-        Provider.of<GlobalTheme>(context).globalDarkTheme;
-    return MaterialApp(
-        theme: globalLightTheme,
-        darkTheme: globalDarkTheme,
-        home: Scaffold(
-            appBar: BackableAppBar(
-              title: const Text("Tell us more about your snippet!"),
-              appBar: AppBar(),
-              widgets: const [],
-              pageContext: context,
-            ),
-            body: Center(
-                child: ListView(
-                    padding: const EdgeInsets.only(
-                        left: 30, right: 30, top: 30, bottom: 30),
-                    children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 20),
-                    child: Text(
-                      'Please place your code below:',
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                  ),
-                  getFormatWidget(),
-                  Container(
-                    margin: const EdgeInsets.only(top: 20, bottom: 20),
-                    child: Text(
-                      'Title of this code snippet?',
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                  ),
-                  InputTextField(
-                      maxLines: 1,
-                      hintText: "Title",
-                      getTextController: titleController),
-                  Container(
-                    margin: const EdgeInsets.only(top: 20, bottom: 20),
-                    child: Text(
-                      'Can you describe what does the snippet do?',
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                  ),
-                  InputTextField(
-                      maxLines: 6,
-                      hintText: "Description",
-                      getTextController: descriptionController),
-                  Container(
-                      alignment: Alignment.center,
-                      margin: const EdgeInsets.all(20),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          checkInput();
-                        },
-                        child: const Text("Submit"),
-                      ))
-                ]))));
+    return Scaffold(
+        appBar: AppBar(title: const Text("Tell us more about your snippet!")),
+        body: Center(
+            child: ListView(
+                padding: const EdgeInsets.only(
+                    left: 30, right: 30, top: 30, bottom: 30),
+                children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                child: Text(
+                  'Please place your code below:',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ),
+              getFormatWidget(),
+              Container(
+                margin: const EdgeInsets.only(top: 20, bottom: 20),
+                child: Text(
+                  'Title of this code snippet?',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ),
+              InputTextField(
+                  maxLines: 1,
+                  hintText: "Title",
+                  getTextController: titleController),
+              Container(
+                margin: const EdgeInsets.only(top: 20, bottom: 20),
+                child: Text(
+                  'Can you describe what does the snippet do?',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ),
+              InputTextField(
+                  maxLines: 6,
+                  hintText: "Description",
+                  getTextController: descriptionController),
+              Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.all(20),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      checkInput();
+                    },
+                    child: const Text("Submit"),
+                  ))
+            ])));
   }
 }

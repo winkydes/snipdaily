@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:snipdaily/fragments/adminFragments/adminHomeFragment.dart';
 import '../../assets/constants.dart';
 import '../../backend/models.dart';
 import '../../widgets/LanguageLabel.dart';
@@ -37,17 +36,11 @@ class _AdminSnippetDetailFragmentState extends State<AdminSnippetDetailFragment>
   Future<void> verifySnippet(bool pass, String docId) async {
     if (pass) {
       db.collection('snippets').doc(docId).update({"verified": VERIFIED});
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const AdminHomeFragment())
-      );
+      Navigator.pushNamed(context, '/adminHome');
     }
     else {
       db.collection('snippets').doc(docId).update({"verified": REJECTED});
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const AdminHomeFragment())
-      );
+      Navigator.pushNamed(context, '/adminHome');
     }
   }
 

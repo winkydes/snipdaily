@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:snipdaily/fragments/OtherProfileFragment.dart';
 import '../backend/models.dart';
 import '../widgets/LanguageLabel.dart';
 import '../widgets/TypeLabel.dart';
@@ -59,7 +60,11 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                   Container(
                     alignment: Alignment.centerRight,
                     margin: const EdgeInsets.only(right: 10, bottom: 10),
-                    child: Text("-- by $author", style: Theme.of(context).textTheme.bodySmall)),
+                    child: GestureDetector(
+                      onTap: () {Navigator.pushNamed(context, '/otherProfile');},
+                      child: Text("-- by $author", style: Theme.of(context).textTheme.bodyMedium)
+                    )
+                  ),
                   // label container
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -7,7 +7,8 @@ import 'package:snipdaily/assets/GlobalTheme.dart';
 import 'firebase_options.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'fragments/OtherProfileFragment.dart';
+import 'fragments/SettingsFragment.dart';
 import 'fragments/adminFragments/AdminHomeFragment.dart';
 
 
@@ -33,12 +34,19 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    final ThemeData globalLightTheme = Provider.of<GlobalTheme>(context).globalLightTheme;
+    final ThemeData globalDarkTheme = Provider.of<GlobalTheme>(context).globalDarkTheme;
+    return MaterialApp(
+      theme: globalLightTheme,
+      darkTheme: globalDarkTheme,
       title: 'SnipDaily',
-      home: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: LoginWidget(),
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': ((context) => const LoginWidget()),
+        '/settings': ((context) => const SettingsFragment()),
+        '/otherProfile': ((context) => const OtherProfileFragment()),
+        '/adminHome': ((context) => const AdminHomeFragment()),
+      },
     );
   }
 }

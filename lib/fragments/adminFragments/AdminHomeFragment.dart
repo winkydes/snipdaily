@@ -47,19 +47,13 @@ class _AdminHomeFragmentState extends State<AdminHomeFragment> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData globalLightTheme = Provider.of<GlobalTheme>(context).globalLightTheme;
-    final ThemeData globalDarkTheme = Provider.of<GlobalTheme>(context).globalDarkTheme;
-    return MaterialApp(
-      theme: globalLightTheme,
-      darkTheme: globalDarkTheme,
-      home: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(),
-        body: Center(
-          child: widgetOptions.elementAt(selectedIndex),
-        ),
-        bottomNavigationBar: customBottomNavigationBar(),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(),
+      body: Center(
+        child: widgetOptions.elementAt(selectedIndex),
       ),
+      bottomNavigationBar: customBottomNavigationBar(),
     );
   }
 }

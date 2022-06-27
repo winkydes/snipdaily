@@ -8,14 +8,14 @@ import 'package:snipdaily/backend/models.dart';
 import 'package:snipdaily/fragments/SettingsFragment.dart';
 import 'package:snipdaily/widgets/RecentContributionSummaryBox.dart';
 
-class ProfileFragment extends StatefulWidget {
-  const ProfileFragment({Key? key}) : super(key: key);
+class OtherProfileFragment extends StatefulWidget {
+  const OtherProfileFragment({Key? key}) : super(key: key);
 
   @override
-  State<ProfileFragment> createState() => _ProfileFragmentState();
+  State<OtherProfileFragment> createState() => _OtherProfileFragmentState();
 }
 
-class _ProfileFragmentState extends State<ProfileFragment> {
+class _OtherProfileFragmentState extends State<OtherProfileFragment> {
   var db = FirebaseFirestore.instance;
   var currentUser = FirebaseAuth.instance.currentUser!;
   late final Stream<UserPref> userStream = db.collection("Users").where("uid", isEqualTo: currentUser.uid).snapshots().map((item) => UserPref.fromSnapshot(item.docs.first));
@@ -42,6 +42,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
       stream: userStream,
       builder: (context, snapshot) {
         return Scaffold(
+          appBar: AppBar(title: const Text("Other's Profile"),),
           body: ListView(
             children: [
               Container(
@@ -108,18 +109,6 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                 child: const Text("Recent Contributions", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
               ),
               RecentContributionSummaryBox(targetUid: userUid,),
-              Column(
-                children: <Widget>[
-                  TextButton(
-                    onPressed: () {_signOut();}, 
-                    child: const Text("Sign Out"),
-                  ),
-                  TextButton(
-                    onPressed: () {Navigator.pushNamed(context, '/settings');},
-                    child: const Text("Settings")
-                  ),
-                ],
-              ),
             ],
           ),
         );

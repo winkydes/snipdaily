@@ -66,12 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData globalLightTheme = Provider.of<GlobalTheme>(context).globalLightTheme;
-    final ThemeData globalDarkTheme = Provider.of<GlobalTheme>(context).globalDarkTheme;
-    return MaterialApp(
-      theme: globalLightTheme,
-      darkTheme: globalDarkTheme,
-      home: Scaffold(
+    return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(widgetTitle.elementAt(selectedIndex)),
@@ -80,7 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: widgetOptions.elementAt(selectedIndex),
         ),
         bottomNavigationBar: customBottomNavigationBar(),
-      ),
     );
   }
 }
