@@ -46,3 +46,35 @@ class UserPref {
     );
   }
 }
+
+class Topic {
+  final String id;
+  final String title;
+  final String contributorId;
+
+  Topic({required this.id, required this.title, required this.contributorId});
+
+  factory Topic.fromSnapshot(DocumentSnapshot snapshot) {
+    return Topic(
+      id: snapshot.id,
+      title: snapshot.data().toString().contains('title') ? snapshot.get('title') : '',
+      contributorId: snapshot.data().toString().contains('contributorId') ? snapshot.get('contributorId') : '',
+    );
+  }
+}
+
+class Message {
+  final String userId;
+  final String content;
+  final String topicId;
+
+  Message({required this.userId, required this.content, required this.topicId});
+
+  factory Message.fromSnapshot(DocumentSnapshot snapshot) {
+    return Message(
+      userId: snapshot.data().toString().contains('userId') ? snapshot.get('userId') : '',
+      content: snapshot.data().toString().contains('content') ? snapshot.get('content') : '',
+      topicId: snapshot.data().toString().contains('topicId') ? snapshot.get('topicId') : '',
+    );
+  }
+}

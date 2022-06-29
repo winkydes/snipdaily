@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
-import 'package:snipdaily/widgets/InputTextField.dart';
 
+var db = FirebaseFirestore.instance;
 class AddTopicFragment extends StatefulWidget {
   const AddTopicFragment({Key? key}) : super(key: key);
 
@@ -26,7 +27,21 @@ class _AddTopicFragmentState extends State<AddTopicFragment> {
         },
       );
     } else {
-      print("topic is created");
+      final topic = <String, dynamic> {
+        "title": topicController.text,
+        "contributorId": FirebaseAuth.instance.currentUser!.uid,
+      };
+      db.collection("topics").add(topic).then((DocumentReference doc) {
+        final firstMessage = <String, dynamic> {
+        "userId": FirebaseAuth.instance.currentUser!.uid,
+        "content": contentController.text,
+        "topicId": doc.id,
+        };
+        db.collection("topics").doc(doc.id).collection("message").add(firstMessage).then((DocumentReference doc2) {
+          print("DocumentSnapshot added with ID: ${doc2.id}");
+        });
+      });
+      Navigator.pop(context);
     }
   }
 
