@@ -41,7 +41,7 @@ class _AddTopicFragmentState extends State<AddTopicFragment> {
           print("DocumentSnapshot added with ID: ${doc2.id}");
         });
       });
-      Navigator.pop(context);
+      Navigator.pushNamedAndRemoveUntil(context,'/', (_) => false);
     }
   }
 
