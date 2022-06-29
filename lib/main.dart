@@ -7,7 +7,7 @@ import 'package:snipdaily/assets/GlobalTheme.dart';
 import 'firebase_options.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'fragments/OtherProfileFragment.dart';
+import 'fragments/AddTopicFragment.dart';
 import 'fragments/SettingsFragment.dart';
 import 'fragments/adminFragments/AdminHomeFragment.dart';
 
@@ -45,6 +45,7 @@ class Login extends StatelessWidget {
         '/': ((context) => const LoginWidget()),
         '/settings': ((context) => const SettingsFragment()),
         '/adminHome': ((context) => const AdminHomeFragment()),
+        '/addTopic': ((context) => const AddTopicFragment()),
       },
     );
   }

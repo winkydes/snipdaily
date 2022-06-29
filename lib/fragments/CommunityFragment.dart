@@ -10,13 +10,15 @@ class CommunityFragment extends StatefulWidget {
 class _CommunityFragmentState extends State<CommunityFragment> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Center(
-          child: Text("This is community screen"),
-        ),
-      ],
+    return Scaffold(
+      body: const Center(child: Text('Press the button below!')),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/addTopic');
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
