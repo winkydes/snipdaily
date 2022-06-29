@@ -36,6 +36,7 @@ class _AddTopicFragmentState extends State<AddTopicFragment> {
         "userId": FirebaseAuth.instance.currentUser!.uid,
         "content": contentController.text,
         "topicId": doc.id,
+        "time": DateTime.now(),
         };
         db.collection("topics").doc(doc.id).collection("message").add(firstMessage).then((DocumentReference doc2) {
           print("DocumentSnapshot added with ID: ${doc2.id}");

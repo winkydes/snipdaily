@@ -27,7 +27,6 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
 
   List<Widget> sortedSnippetSubList(List<Snippet> list) {
     list.sort((a, b) => b.date.compareTo(a.date));
-    print(list.first.date);
     for (var snip in list) {
       snippetWidgetList.add(ProfileSnippetCardView(
       cardSnippet: snip,

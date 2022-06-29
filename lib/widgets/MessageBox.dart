@@ -1,4 +1,5 @@
 import 'package:chat_bubbles/chat_bubbles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../backend/models.dart';
 
@@ -8,9 +9,18 @@ class MessageBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BubbleSpecialThree(
-      text: message.content,
-      color: Colors.lightBlue,
-    );
+    if (message.userId == FirebaseAuth.instance.currentUser!.uid) {
+      return BubbleSpecialThree(
+        text: message.content,
+        color: Colors.lightBlue,
+      );
+    } else {
+      return BubbleSpecialThree(
+        text: message.content,
+        color: Colors.grey,
+        isSender: false,
+      );
+    }
+      
   }
 }

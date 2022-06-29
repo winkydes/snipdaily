@@ -67,14 +67,16 @@ class Message {
   final String userId;
   final String content;
   final String topicId;
+  final DateTime time;
 
-  Message({required this.userId, required this.content, required this.topicId});
+  Message({required this.userId, required this.content, required this.topicId, required this.time});
 
   factory Message.fromSnapshot(DocumentSnapshot snapshot) {
     return Message(
       userId: snapshot.data().toString().contains('userId') ? snapshot.get('userId') : '',
       content: snapshot.data().toString().contains('content') ? snapshot.get('content') : '',
       topicId: snapshot.data().toString().contains('topicId') ? snapshot.get('topicId') : '',
+      time: snapshot.data().toString().contains('time') ? snapshot.get('time').toDate() : DateTime.parse('0000-00-00 00:00:00Z'),
     );
   }
 }
