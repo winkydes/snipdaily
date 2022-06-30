@@ -16,6 +16,7 @@ class ChatroomFragment extends StatefulWidget {
 
 class _ChatroomFragmentState extends State<ChatroomFragment> {
   final messageController = TextEditingController();
+  var listViewScrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +49,7 @@ class _ChatroomFragmentState extends State<ChatroomFragment> {
               children: <Widget>[
                 // messages
                 ListView(
+                  controller: listViewScrollController,
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 60),
                   children: messageList
                       .map((e) {
@@ -88,6 +90,15 @@ class _ChatroomFragmentState extends State<ChatroomFragment> {
                         ),
                         Expanded(
                           child: TextField(
+                            onTap: () {
+                              Future.delayed(const Duration(milliseconds: 500), () {
+                                listViewScrollController.animateTo(
+                                  listViewScrollController.position.maxScrollExtent,
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.fastOutSlowIn,
+                                );
+                              });
+                            },
                             controller: messageController,
                             decoration: const InputDecoration(
                                 hintText: "Write message...",

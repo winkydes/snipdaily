@@ -35,11 +35,11 @@ class MessageBox extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: (message.userId == FirebaseAuth.instance.currentUser!.uid? CrossAxisAlignment.end : CrossAxisAlignment.start),
                   children: [
-                    Text(snapshot.data!.docs.first['displayName'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),),
+                    (message.userId == FirebaseAuth.instance.currentUser!.uid? const SizedBox.shrink() : Text(snapshot.data!.docs.first['displayName'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),)),
                     Wrap(
                       children: [
                         Text(message.content, style: const TextStyle(fontSize: 20, color: Colors.black),),
-                        Container(padding: const EdgeInsets.only(top: 10, left: 10),child: Text(formattedTime))
+                        Container(padding: const EdgeInsets.only(top: 10, left: 10),child: Text(formattedTime, style: const TextStyle(color: Colors.grey)))
                       ],
                     ),
                   ],
