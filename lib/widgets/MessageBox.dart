@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../backend/models.dart';
+import '../fragments/OtherProfileFragment.dart';
 
 class MessageBox extends StatelessWidget {
   final Message message;
@@ -35,7 +36,14 @@ class MessageBox extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: (message.userId == FirebaseAuth.instance.currentUser!.uid? CrossAxisAlignment.end : CrossAxisAlignment.start),
                   children: [
-                    (message.userId == FirebaseAuth.instance.currentUser!.uid? const SizedBox.shrink() : Text(snapshot.data!.docs.first['displayName'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),)),
+                    (message.userId == FirebaseAuth.instance.currentUser!.uid?
+                      const SizedBox.shrink()
+                       : 
+                      GestureDetector(
+                        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OtherProfileFragment(authorId: message.userId,)));},
+                        child: Text(snapshot.data!.docs.first['displayName'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),)
+                        )
+                    ),
                     Wrap(
                       children: [
                         Text(message.content, style: const TextStyle(fontSize: 20, color: Colors.black),),
