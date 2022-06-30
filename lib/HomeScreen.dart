@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:snipdaily/fragments/AddSnippetFragment.dart';
 import 'package:snipdaily/fragments/ProfileFragment.dart';
-import 'package:snipdaily/fragments/AskFragment.dart';
+import 'package:snipdaily/fragments/BadgesFragment.dart';
 import 'package:snipdaily/fragments/CommunityFragment.dart';
-
-import 'assets/GlobalTheme.dart';
 import 'fragments/ExploreFragment.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const ExploreFragment(),
     const CommunityFragment(),
     const AddSnippetFragment(),
-    const AskFragment(),
+    const BadgesFragment(),
     const ProfileFragment(),
   ];
 
@@ -51,8 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
               label: 'Contribute'
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.question_mark),
-              label: 'Ask'
+              icon: Icon(Icons.emoji_events),
+              label: 'Badges'
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
