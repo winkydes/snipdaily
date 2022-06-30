@@ -27,15 +27,8 @@ class _ChatroomFragmentState extends State<ChatroomFragment> {
               .doc(widget.topic.id)
               .collection('message')
               .snapshots(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            List<Message> messageList = snapshot.data!.docs
-              .map((DocumentSnapshot doc) {
-                return Message.fromSnapshot(doc);
-              })
-              .toList();
-            messageList.sort((a, b) => a.time.compareTo(b.time));
-            if (snapshot.hasError) {
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError || snapshot.data == null) {
               return const Center(
                 child: Text('Something went wrong'),
               );
@@ -45,17 +38,29 @@ class _ChatroomFragmentState extends State<ChatroomFragment> {
                 child: CircularProgressIndicator(),
               );
             }
+            List<Message> messageList = snapshot.data!.docs
+              .map((DocumentSnapshot doc) {
+                return Message.fromSnapshot(doc);
+              })
+              .toList();
+            messageList.sort((a, b) => a.time.compareTo(b.time));
             return Stack(
               children: <Widget>[
+                // messages
                 ListView(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 60),
                   children: messageList
-                      .map((e) => MessageBox(message: e))
+                      .map((e) {
+                        bool firstMsg = messageList.indexOf(e) == 0? true : messageList.elementAt(messageList.indexOf(e) - 1).time.day != e.time.day;
+                        return MessageBox(message: e, isFirstMsgOfDay: firstMsg,);
+                      })
                       .toList(),
                 ),
+                // bottom chat bar
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Container(
+                    color: Colors.white,
                     padding:
                         const EdgeInsets.only(left: 10, bottom: 10, top: 10),
                     height: 60,
