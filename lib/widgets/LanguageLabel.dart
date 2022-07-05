@@ -49,7 +49,7 @@ class _LanguageLabelState extends State<LanguageLabel> {
                 margin: const EdgeInsets.only(left: 5, right: 5),
                 padding: const EdgeInsets.only(left:10, right: 10, top: 5, bottom: 5),
                 decoration: containerDec(Colors.white),
-                child: const Text('Error', style: TextStyle(color: Colors.black))),
+                child: Text(type, style: const TextStyle(color: Colors.black))),
           ]);
         }
     }

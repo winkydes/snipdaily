@@ -12,6 +12,7 @@ import 'fragments/AddTopicFragment.dart';
 import 'fragments/SettingsFragment.dart';
 import 'fragments/TodaySnipSplashFragment.dart';
 import 'fragments/adminFragments/AdminHomeFragment.dart';
+import 'fragments/settingsFragments/PrefFragment.dart';
 
 
 Future<void> main() async {
@@ -45,10 +46,10 @@ class Login extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': ((context) => const LoginWidget()),
-        '/home': ((context) => const HomeScreen()),
         '/settings': ((context) => const SettingsFragment()),
         '/adminHome': ((context) => const AdminHomeFragment()),
         '/addTopic': ((context) => const AddTopicFragment()),
+        '/pref': ((context) => const PrefFragment()),
       },
     );
   }
@@ -62,13 +63,12 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-
-  bool loginState = false;
   String userId = '';
   String? displayName = '';
   var db = FirebaseFirestore.instance;
   int day = DateTime.now().day.toInt();
   bool todayFirstLogin = false;
+  bool userExists = false;
 
   Future<void> setAuthData(Map<String, dynamic> data) async {
     if (FirebaseAuth.instance.currentUser != null) {
@@ -86,6 +86,21 @@ class _LoginWidgetState extends State<LoginWidget> {
     });
   }
 
+  void checkIfUserExists(String uid) async {
+    try {
+      var doc = await db.collection('Users').doc(uid).get();
+      print(doc.exists);
+      if (doc.exists) {
+        userExists = true;
+      }
+      else {
+        userExists = false;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   @override
   void initState() {
     loadTodayLogined();
@@ -97,25 +112,6 @@ class _LoginWidgetState extends State<LoginWidget> {
         stream: FirebaseAuth.instance.authStateChanges(),
         initialData: FirebaseAuth.instance.currentUser,
         builder: (context, snapshot) {
-
-          FirebaseAuth.instance.authStateChanges().listen((User? user) {
-            if (user == null) {
-              loginState = false;
-            } else {
-              loginState = true;
-              userId = user.uid;
-              displayName = user.displayName;
-            }
-          });
-          if (loginState == true) {
-            final userBody = <String, dynamic> {
-              "uid": userId,
-              "isLogin": loginState,
-              "displayName": displayName,
-            };
-            setAuthData(userBody);
-          }
-
           if (!snapshot.hasData) {
             return const SignInScreen(
               providerConfigs: [
@@ -123,6 +119,19 @@ class _LoginWidgetState extends State<LoginWidget> {
               ]
             );
           }
+          else {
+            checkIfUserExists(snapshot.data!.uid);
+            if (!userExists) {
+              final userBody = <String, dynamic> {
+                "uid": snapshot.data!.uid,
+                "isLogin": true,
+                "displayName": snapshot.data!.displayName,
+                "languagePrefs": [],
+              };
+              setAuthData(userBody);
+            }
+          }
+
           // this email can later be change to any admin email
           if (snapshot.data?.email == "keithlam0110@gmail.com") {
             return const AdminHomeFragment();
@@ -130,7 +139,6 @@ class _LoginWidgetState extends State<LoginWidget> {
           if (todayFirstLogin) {
             return const TodaySnipSplashFragment();
           }
-          
           return const HomeScreen();
         },
       );

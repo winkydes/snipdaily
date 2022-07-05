@@ -35,14 +35,16 @@ class UserPref {
   final String uid;
   final String displayName;
   final bool isLogin;
+  final List<dynamic> languagePrefs;
 
-  UserPref({required this.uid, required this.displayName, required this.isLogin});
+  UserPref({required this.uid, required this.displayName, required this.isLogin, required this.languagePrefs});
 
   factory UserPref.fromSnapshot(DocumentSnapshot snapshot) {
     return UserPref(
       uid: snapshot.data().toString().contains('uid') ? snapshot.get('uid') : '',
       displayName: snapshot.data().toString().contains('displayName') ? snapshot.get('displayName') : '',
       isLogin: snapshot.data().toString().contains('isLogin') ? snapshot.get('isLogin') : '',
+      languagePrefs: snapshot.data().toString().contains('languagePrefs') ? snapshot.get('languagePrefs') : [],
     );
   }
 }

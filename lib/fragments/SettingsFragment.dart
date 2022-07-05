@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:snipdaily/widgets/BackableAppBar.dart';
 import 'package:snipdaily/widgets/SettingsItemWidget.dart';
-
-import '../assets/GlobalTheme.dart';
 
 class SettingsFragment extends StatelessWidget {
   const SettingsFragment({Key? key}) : super(key: key);
@@ -17,7 +13,7 @@ class SettingsFragment extends StatelessWidget {
           children: [
             SettingsItemWidget(name: "Account Settings", onTapAction: () {},),
             SettingsItemWidget(name: "Light/Dark mode", onTapAction: () {},),
-            SettingsItemWidget(name: "Change Preference", onTapAction: () {},),
+            SettingsItemWidget(name: "Change Preference", onTapAction: () {Navigator.pushNamed(context, "/pref");},),
             SettingsItemWidget(name: "Change Your Password", onTapAction: () {},),
             SettingsItemWidget(name: "Contact us", onTapAction: () {},),
           ],
