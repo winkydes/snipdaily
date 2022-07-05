@@ -120,12 +120,13 @@ class _LoginWidgetState extends State<LoginWidget> {
             );
           }
           else {
+            // TODO: currently after register, the user pref entry will not be initialized until the next login
             checkIfUserExists(snapshot.data!.uid);
             if (!userExists) {
               final userBody = <String, dynamic> {
                 "uid": snapshot.data!.uid,
                 "isLogin": true,
-                "displayName": snapshot.data!.displayName,
+                "displayName": snapshot.data!.displayName ?? "No name",
                 "languagePrefs": [],
               };
               setAuthData(userBody);

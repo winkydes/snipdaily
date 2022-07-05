@@ -49,6 +49,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
               Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.only(left: 50),
+                //TODO: change this to a custom textfield to update both user display name and user pref display name
                 child: const EditableUserDisplayName()
               ),
               Container(
