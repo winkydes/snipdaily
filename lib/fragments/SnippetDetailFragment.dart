@@ -44,7 +44,7 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
             child: CircularProgressIndicator(),
           );
         } else {
-          var author = snapshot.data!.docs.first['displayName'];
+          var author = snapshot.data!.docs.isEmpty? 'Deleted User' : snapshot.data!.docs.first['displayName'];
           return Scaffold(
             appBar: AppBar(title: const Text("Details")),
             body: ListView(

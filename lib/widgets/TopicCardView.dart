@@ -28,7 +28,7 @@ class TopicCardView extends StatelessWidget {
               child: ListTile(
                   title: Text(topic.title),
                   subtitle: Text(
-                    snapshot.data!.docs.first['displayName'],
+                    snapshot.data!.docs.isEmpty? 'Deleted User' : snapshot.data!.docs.first['displayName']
                   ),
                 )
             );

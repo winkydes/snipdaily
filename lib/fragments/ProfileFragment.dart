@@ -25,6 +25,8 @@ class _ProfileFragmentState extends State<ProfileFragment> {
   Future<void> _signOut() async {
     await db.collection('Users').doc(currentUser.uid).update({"isLogin": false});
     await FirebaseAuth.instance.signOut();
+    if (!mounted) return;
+    await Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
   }
 
   @override

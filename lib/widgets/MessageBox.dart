@@ -40,8 +40,12 @@ class MessageBox extends StatelessWidget {
                       const SizedBox.shrink()
                        : 
                       GestureDetector(
-                        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OtherProfileFragment(authorId: message.userId,)));},
-                        child: Text(snapshot.data!.docs.first['displayName'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),)
+                        onTap: () {
+                          if (snapshot.data!.docs.isNotEmpty){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => OtherProfileFragment(authorId: message.userId,)));
+                          }
+                        },
+                        child: Text(snapshot.data!.docs.isEmpty? 'Deleted User' : snapshot.data!.docs.first['displayName'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),)
                         )
                     ),
                     Wrap(
