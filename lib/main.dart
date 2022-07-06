@@ -86,15 +86,19 @@ class _LoginWidgetState extends State<LoginWidget> {
     });
   }
 
-  void checkIfUserExists(String uid) async {
+  void userExistenceAction(String uid) async {
     try {
       var doc = await db.collection('Users').doc(uid).get();
-      print(doc.exists);
-      if (doc.exists) {
-        userExists = true;
-      }
-      else {
-        userExists = false;
+      if (!doc.exists) {
+        final userBody = <String, dynamic> {
+          "uid": uid,
+          "isLogin": true,
+          "displayName": "No name",
+          "languagePrefs": [],
+        };
+        setAuthData(userBody);
+      } else {
+        await db.collection('Users').doc(uid).update({"isLogin": true});
       }
     } catch (e) {
       rethrow;
@@ -119,19 +123,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               ]
             );
           }
-          else {
-            // TODO: currently after register, the user pref entry will not be initialized until the next login
-            checkIfUserExists(snapshot.data!.uid);
-            if (!userExists) {
-              final userBody = <String, dynamic> {
-                "uid": snapshot.data!.uid,
-                "isLogin": true,
-                "displayName": snapshot.data!.displayName ?? "No name",
-                "languagePrefs": [],
-              };
-              setAuthData(userBody);
-            }
-          }
+          userExistenceAction(snapshot.data!.uid);
 
           // this email can later be change to any admin email
           if (snapshot.data?.email == "keithlam0110@gmail.com") {

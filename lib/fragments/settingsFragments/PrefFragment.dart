@@ -47,7 +47,7 @@ class _PrefFragmentState extends State<PrefFragment> {
                   for (var item in snapshot.data!.docs.first['languagePrefs']) {
                     checkedList[LANGUAGE.indexOf(item)] = true;
                   }
-                  counter ++;
+                  counter++;
                 }
               }
               return Column(
@@ -70,6 +70,7 @@ class _PrefFragmentState extends State<PrefFragment> {
                 updatedLanguageList.add(LANGUAGE[index]);
               }
               db.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid).update({"languagePrefs": updatedLanguageList});
+              Navigator.pop(context);
             },
             child: const Text("Save")
           ),

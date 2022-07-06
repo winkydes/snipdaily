@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:snipdaily/assets/constants.dart';
 import 'package:snipdaily/backend/models.dart';
 import 'package:snipdaily/widgets/RecentContributionSummaryBox.dart';
+
+import '../widgets/CustomEditableUserDisplayName.dart';
 
 class ProfileFragment extends StatefulWidget {
   const ProfileFragment({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
   late var userDisplayName = '';
 
   Future<void> _signOut() async {
+    await db.collection('Users').doc(currentUser.uid).update({"isLogin": false});
     await FirebaseAuth.instance.signOut();
   }
 
@@ -49,8 +51,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
               Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.only(left: 50),
-                //TODO: change this to a custom textfield to update both user display name and user pref display name
-                child: const EditableUserDisplayName()
+                child: const CustomEditableUserDisplayName()
               ),
               Container(
                 margin: const EdgeInsets.only(left: 5, right: 5),
