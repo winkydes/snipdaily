@@ -12,6 +12,7 @@ import 'fragments/AddTopicFragment.dart';
 import 'fragments/SettingsFragment.dart';
 import 'fragments/TodaySnipSplashFragment.dart';
 import 'fragments/adminFragments/AdminHomeFragment.dart';
+import 'fragments/exploreFragments/CategoryFragment.dart';
 import 'fragments/settingsFragments/PrefFragment.dart';
 
 
@@ -50,6 +51,7 @@ class Login extends StatelessWidget {
         '/adminHome': ((context) => const AdminHomeFragment()),
         '/addTopic': ((context) => const AddTopicFragment()),
         '/pref': ((context) => const PrefFragment()),
+        '/categories': ((context) => const CategoryFragment()),
       },
     );
   }

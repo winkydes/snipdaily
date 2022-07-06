@@ -3,7 +3,7 @@ import 'package:snipdaily/fragments/AddSnippetFragment.dart';
 import 'package:snipdaily/fragments/ProfileFragment.dart';
 import 'package:snipdaily/fragments/BadgesFragment.dart';
 import 'package:snipdaily/fragments/CommunityFragment.dart';
-import 'fragments/ExploreFragment.dart';
+import 'fragments/exploreFragments/ExploreFragment.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
