@@ -36,12 +36,11 @@ class _AdminSnippetDetailFragmentState extends State<AdminSnippetDetailFragment>
   Future<void> verifySnippet(bool pass, String docId) async {
     if (pass) {
       db.collection('snippets').doc(docId).update({"verified": VERIFIED});
-      Navigator.pushNamed(context, '/adminHome');
     }
     else {
       db.collection('snippets').doc(docId).update({"verified": REJECTED});
-      Navigator.pushNamed(context, '/adminHome');
     }
+    Navigator.pushNamedAndRemoveUntil(context, '/adminHome', (_) => false);
   }
 
   @override

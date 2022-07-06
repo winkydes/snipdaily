@@ -19,7 +19,7 @@ class _AdminHomeFragmentState extends State<AdminHomeFragment> {
     const ProfileFragment()
   ];
 
-  var widgetTitle = ["Verifify Snippet"];
+  var widgetTitle = ["Verify Snippet"];
 
   void onItemTapped(int index) {
     setState(() {
