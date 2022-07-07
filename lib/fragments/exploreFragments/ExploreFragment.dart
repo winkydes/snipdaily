@@ -58,20 +58,25 @@ class _ExploreFragmentState extends State<ExploreFragment> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Card(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  padding: const EdgeInsets.all(15),
-                  width: _screen.width * 0.4,
-                  height: _screen.height * 0.1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text("Languages", style: TextStyle(fontSize: 20),),
-                      Align(alignment: Alignment.centerRight, child: Icon(Icons.language, size: 22,))
-                    ],
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/languages');
+                },
+                child: Card(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    width: _screen.width * 0.4,
+                    height: _screen.height * 0.1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text("Languages", style: TextStyle(fontSize: 20),),
+                        Align(alignment: Alignment.centerRight, child: Icon(Icons.language, size: 22,))
+                      ],
+                    ),
                   ),
                 ),
               ),

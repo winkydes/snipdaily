@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:snipdaily/assets/constants.dart';
-import 'package:snipdaily/widgets/SnippetCardView.dart';
-import '../backend/models.dart';
+import '../../assets/constants.dart';
+import '../../backend/models.dart';
+import '../../widgets/SnippetCardView.dart';
 
-class SnippetListFragment extends StatefulWidget {
-  final String type;
-  const SnippetListFragment({Key? key, required this.type}) : super(key: key);
+class LanguageSnipFilterFragment extends StatefulWidget {
+  final String language;
+  const LanguageSnipFilterFragment({Key? key, required this.language}) : super(key: key);
 
   @override
-  State<SnippetListFragment> createState() => _SnippetListFragmentState();
+  State<LanguageSnipFilterFragment> createState() => _LanguageSnipFilterFragmentState();
 }
 
-class _SnippetListFragmentState extends State<SnippetListFragment> {
+class _LanguageSnipFilterFragmentState extends State<LanguageSnipFilterFragment> {
   // take data from firebase in the form of Stream<Iterable<Snippet>>
   late final Stream<Iterable<Snippet>> _snippetStream = FirebaseFirestore
       .instance
       .collection('snippets')
-      .where("type", isEqualTo: widget.type) 
+      .where("language", isEqualTo: widget.language) 
       .where("verified", isEqualTo: VERIFIED)
       .snapshots()
       .map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
@@ -34,11 +34,10 @@ class _SnippetListFragmentState extends State<SnippetListFragment> {
         });
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(widget.type)),
+        appBar: AppBar(title: Text(widget.language)),
         body: StreamBuilder<Iterable<Snippet>>(
             stream: _snippetStream,
             builder: (context, snapshot) {
@@ -65,7 +64,6 @@ class _SnippetListFragmentState extends State<SnippetListFragment> {
                       left: 30, right: 30, top: 30, bottom: 30),
                   children: snippetList);
             }),
-      
     );
   }
 }
