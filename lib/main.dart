@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:snipdaily/HomeScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:snipdaily/assets/GlobalTheme.dart';
+import 'package:snipdaily/fragments/exploreFragments/RandomSnippetFragment.dart';
 import 'firebase_options.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,6 +55,7 @@ class Login extends StatelessWidget {
         '/pref': ((context) => const PrefFragment()),
         '/categories': ((context) => const CategoryFragment()),
         '/languages': ((context) => const LanguageFragment()),
+        '/rndSnip': ((context) => const RandomSnippetFragment())
       },
     );
   }

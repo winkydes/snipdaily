@@ -25,12 +25,15 @@ class _ExploreFragmentState extends State<ExploreFragment> {
                 padding: const EdgeInsets.all(15),
                 width: _screen.width * 0.4,
                 height: _screen.height * 0.2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text("Random Snippet", style: TextStyle(fontSize: 20),),
-                    Align(alignment: Alignment.bottomRight, child: Icon(Icons.shuffle, size: 40,))
-                  ],
+                child: GestureDetector(
+                  onTap: () {Navigator.pushNamed(context, '/rndSnip');},
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text("Random Snippet", style: TextStyle(fontSize: 20),),
+                      Align(alignment: Alignment.bottomRight, child: Icon(Icons.shuffle, size: 40,))
+                    ],
+                  ),
                 ),
               ),
             ),
