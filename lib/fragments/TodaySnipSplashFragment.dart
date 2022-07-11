@@ -18,6 +18,7 @@ class _TodaySnipSplashFragmentState extends State<TodaySnipSplashFragment> {
 
   void updatePref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear(); //clear previous preferences
     prefs.setBool("login$day", false);
   }
 
