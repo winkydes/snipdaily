@@ -64,52 +64,43 @@ class _ChatroomFragmentState extends State<ChatroomFragment> {
                   child: Container(
                     color: Colors.white,
                     padding:
-                        const EdgeInsets.only(left: 10, bottom: 10, top: 10),
-                    height: 60,
+                        const EdgeInsets.only(bottom: 10, top: 10),
                     width: double.infinity,
                     child: Row(
                       children: <Widget>[
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                              color: Colors.lightBlue,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
                         const SizedBox(
                           width: 15,
                         ),
                         Expanded(
-                          child: TextField(
-                            onTap: () {
-                              Future.delayed(const Duration(milliseconds: 500), () {
-                                listViewScrollController.animateTo(
-                                  listViewScrollController.position.maxScrollExtent,
-                                  duration: const Duration(seconds: 1),
-                                  curve: Curves.fastOutSlowIn,
-                                );
-                              });
-                            },
-                            controller: messageController,
-                            decoration: const InputDecoration(
+                          child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          reverse: true,
+                            child: TextField(
+                              onTap: () {
+                                Future.delayed(const Duration(milliseconds: 500), () {
+                                  listViewScrollController.animateTo(
+                                    listViewScrollController.position.maxScrollExtent,
+                                    duration: const Duration(seconds: 1),
+                                    curve: Curves.fastOutSlowIn,
+                                  );
+                                });
+                              },
+                              maxLines: 5,
+                              minLines: 1,
+                              controller: messageController,
+                              decoration: const InputDecoration(
                                 hintText: "Write message...",
-                                border: InputBorder.none),
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.only(left: 15, right: 15, top: 0, bottom: 0)),
+                            ),
                           ),
                         ),
                         const SizedBox(
-                          width: 15,
+                          width: 10,
                         ),
-                        Padding(
+                        Container(
                           padding: const EdgeInsets.only(right: 10),
+                          height:40,
                           child: FloatingActionButton(
                             onPressed: () {
                               if (messageController.text != '') {
@@ -128,6 +119,7 @@ class _ChatroomFragmentState extends State<ChatroomFragment> {
                                 messageController.text = '';
                               }
                             },
+                            shape: const CircleBorder(),
                             backgroundColor: Colors.blue,
                             elevation: 0,
                             child: const Icon(
