@@ -17,16 +17,16 @@ class _ExploreFragmentState extends State<ExploreFragment> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Card(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                padding: const EdgeInsets.all(15),
-                width: _screen.width * 0.4,
-                height: _screen.height * 0.2,
-                child: GestureDetector(
-                  onTap: () {Navigator.pushNamed(context, '/rndSnip');},
+            GestureDetector(
+              onTap: () {Navigator.pushNamed(context, '/rndSnip');},
+              child: Card(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  padding: const EdgeInsets.all(15),
+                  width: _screen.width * 0.4,
+                  height: _screen.height * 0.2,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
