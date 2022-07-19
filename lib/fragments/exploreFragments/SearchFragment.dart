@@ -100,12 +100,6 @@ class _SearchFragmentState extends State<SearchFragment> {
                 ),
               ),
             ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.filter_list),
-                onPressed:() {}
-              )
-            ],
           ),
           body: ListView.builder(
             padding: const EdgeInsets.all(20),
