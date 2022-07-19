@@ -15,6 +15,7 @@ import 'fragments/TodaySnipSplashFragment.dart';
 import 'fragments/adminFragments/AdminHomeFragment.dart';
 import 'fragments/exploreFragments/CategoryFragment.dart';
 import 'fragments/exploreFragments/LanguageFragment.dart';
+import 'fragments/exploreFragments/SearchFragment.dart';
 import 'fragments/settingsFragments/PrefFragment.dart';
 
 
@@ -43,6 +44,7 @@ class Login extends StatelessWidget {
     final ThemeData globalLightTheme = Provider.of<GlobalTheme>(context).globalLightTheme;
     final ThemeData globalDarkTheme = Provider.of<GlobalTheme>(context).globalDarkTheme;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: globalLightTheme,
       darkTheme: globalDarkTheme,
       title: 'SnipDaily',
@@ -55,7 +57,8 @@ class Login extends StatelessWidget {
         '/pref': ((context) => const PrefFragment()),
         '/categories': ((context) => const CategoryFragment()),
         '/languages': ((context) => const LanguageFragment()),
-        '/rndSnip': ((context) => const RandomSnippetFragment())
+        '/rndSnip': ((context) => const RandomSnippetFragment()),
+        '/search': ((context) => const SearchFragment())
       },
     );
   }

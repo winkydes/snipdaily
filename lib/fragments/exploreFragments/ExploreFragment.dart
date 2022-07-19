@@ -9,6 +9,7 @@ class ExploreFragment extends StatefulWidget {
 }
 
 class _ExploreFragmentState extends State<ExploreFragment> {
+
   @override
   Widget build(BuildContext context) {
     final _screen =  MediaQuery.of(context).size;
@@ -38,20 +39,25 @@ class _ExploreFragmentState extends State<ExploreFragment> {
                 ),
               ),
             ),
-            Card(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                padding: const EdgeInsets.all(15),
-                width: _screen.width * 0.4,
-                height: _screen.height * 0.2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text("Search Snippet", style: TextStyle(fontSize: 20),),
-                    Align(alignment: Alignment.bottomRight, child: Icon(Icons.search, size: 40,))
-                  ],
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/search');
+              },
+              child: Card(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  padding: const EdgeInsets.all(15),
+                  width: _screen.width * 0.4,
+                  height: _screen.height * 0.2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text("Search Snippet", style: TextStyle(fontSize: 20),),
+                      Align(alignment: Alignment.bottomRight, child: Icon(Icons.search, size: 40,))
+                    ],
+                  ),
                 ),
               ),
             )
