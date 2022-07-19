@@ -50,7 +50,7 @@ class _ChatroomFragmentState extends State<ChatroomFragment> {
                 // messages
                 ListView(
                   controller: listViewScrollController,
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 60),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 65),
                   children: messageList
                       .map((e) {
                         bool firstMsg = messageList.indexOf(e) == 0? true : messageList.elementAt(messageList.indexOf(e) - 1).time.day != e.time.day;

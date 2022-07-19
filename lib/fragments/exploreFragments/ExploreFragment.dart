@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ExploreFragment extends StatefulWidget {
   const ExploreFragment({Key? key}) : super(key: key);
@@ -108,6 +109,11 @@ class _ExploreFragmentState extends State<ExploreFragment> {
             ],
           ),
         ),
+        // explore screen icon
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: IconButton(icon: SvgPicture.asset('lib/assets/image/content_team.svg'), onPressed: () { }, iconSize: 200,),
+        )
       ],
     );
   }
