@@ -28,10 +28,26 @@ class _PrefFragmentState extends State<PrefFragment> {
     )).toList();
   }
 
+  showInfoAlert() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          content: Text("Changing language preferences will tell us which kind of snippets you would like to study. Choosing the options below will only affect results of random snippets and every day's snippet suggestion. ")
+        );
+      }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Change Language Preference")),
+      appBar: AppBar(
+        title: const Text("Language Preference"),
+        actions: [
+          IconButton(onPressed: () {showInfoAlert();}, icon: const Icon(Icons.info_outline))
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [

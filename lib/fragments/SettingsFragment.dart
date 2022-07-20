@@ -23,7 +23,7 @@ class _SettingsFragmentState extends State<SettingsFragment> {
           children: [
             SettingsItemWidget(name: "Account Settings", onTapAction: () {},),
             SettingsItemWidget(name: "Light/Dark mode", onTapAction: () {},),
-            SettingsItemWidget(name: "Change Preference", onTapAction: () {Navigator.pushNamed(context, "/pref");},),
+            SettingsItemWidget(name: "Change Language Preference", onTapAction: () {Navigator.pushNamed(context, "/pref");},),
             SettingsItemWidget(name: "Change Your Password", onTapAction: () {},),
             SettingsItemWidget(name: "Contact us", onTapAction: () {},),
             SettingsItemWidget(name: "Delete Account", onTapAction: () {
