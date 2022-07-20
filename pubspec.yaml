@@ -43,6 +43,7 @@ dependencies:
   flutter_profile_picture: ^2.0.0
   shared_preferences: ^2.0.15
   flutter_svg: ^1.1.1+1
+  google_sign_in: ^5.4.0
 
 dev_dependencies:
   flutter_test:

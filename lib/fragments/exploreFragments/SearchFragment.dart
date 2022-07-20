@@ -102,7 +102,7 @@ class _SearchFragmentState extends State<SearchFragment> {
             );
           }
           if (searchResult.isEmpty && searchController.text.isNotEmpty) {
-            return const Center (
+            return const Center(
               child: Text('There are no snippets related to your search, please try again.'),
             );
           }

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:snipdaily/HomeScreen.dart';
@@ -18,6 +19,12 @@ import 'fragments/exploreFragments/LanguageFragment.dart';
 import 'fragments/exploreFragments/SearchFragment.dart';
 import 'fragments/settingsFragments/PrefFragment.dart';
 
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  scopes: [
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ],
+);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -129,6 +136,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             return const SignInScreen(
               providerConfigs: [
                 EmailProviderConfiguration(),
+                GoogleProviderConfiguration(clientId: '943530903500-mgmlq42h5fdrcma4jekq3toih5jenalv.apps.googleusercontent.com')
               ]
             );
           }
