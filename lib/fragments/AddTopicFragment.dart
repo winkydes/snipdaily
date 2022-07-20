@@ -38,9 +38,7 @@ class _AddTopicFragmentState extends State<AddTopicFragment> {
         "topicId": doc.id,
         "time": DateTime.now(),
         };
-        db.collection("topics").doc(doc.id).collection("message").add(firstMessage).then((DocumentReference doc2) {
-          print("DocumentSnapshot added with ID: ${doc2.id}");
-        });
+        db.collection("topics").doc(doc.id).collection("message").add(firstMessage);
       });
       Navigator.pushNamedAndRemoveUntil(context,'/', (_) => false);
     }

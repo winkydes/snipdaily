@@ -70,8 +70,7 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
         "verified": NOT_VERIFIED,
         "date": DateTime.now(),
       };
-      db.collection("snippets").add(snippet).then((DocumentReference doc) =>
-          print("DocumentSnapshot added with ID: ${doc.id}"));
+      db.collection("snippets").add(snippet);
       Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
     }
   }

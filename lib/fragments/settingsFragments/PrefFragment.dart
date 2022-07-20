@@ -21,8 +21,6 @@ class _PrefFragmentState extends State<PrefFragment> {
       title: Text(e),
       value: checkedList[LANGUAGE.indexOf(e)],
       onChanged: (value) {
-        print(checkedList);
-        print(value);
         setState(() {
           checkedList[LANGUAGE.indexOf(e)] = value;
         });
