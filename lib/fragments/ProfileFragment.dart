@@ -64,49 +64,49 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FutureBuilder<int>(
-                      future: snipData.get().then((value) => value.size),
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting: return const Text('Loading....');
-                          default:
-                            if (snapshot.hasError) {
-                              return Text('Error: ${snapshot.error}');
-                            } else {
-                              return SizedBox(
-                              width: _screen.width * 0.30,
-                              child: Column(
+                    SizedBox(
+                      width: _screen.width * 0.30,
+                      child: FutureBuilder<int>(
+                        future: snipData.get().then((value) => value.size),
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting: return const Center(child: Text('Loading....'));
+                            default:
+                              if (snapshot.hasError) {
+                                return Center(child: Text('Error: ${snapshot.error}'));
+                              } else {
+                                return Column(
                                 children: [
                                   Text(snapshot.data.toString(), style: const TextStyle(fontSize: 30)),
                                   const Text("Contributions Verified", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
                                 ],
-                              ),
-                            );
+                              );
+                              }
                             }
                           }
-                        }
+                      ),
                     ),
-                    FutureBuilder<int>(
-                      future: msgData.get().then((value) => value.size),
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting: return const Text('Loading....');
-                          default:
-                            if (snapshot.hasError) {
-                              return Text('Error: ${snapshot.error}');
-                            } else {
-                              return SizedBox(
-                                width: _screen.width * 0.30,
-                                child: Column(
+                    SizedBox(
+                      width: _screen.width * 0.30,
+                      child: FutureBuilder<int>(
+                        future: msgData.get().then((value) => value.size),
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting: return const Center(child: Text('Loading....'));
+                            default:
+                              if (snapshot.hasError) {
+                                return Center(child: Text('Error: ${snapshot.error}'));
+                              } else {
+                                return Column(
                                   children: [
                                     Text(snapshot.data.toString(), style: const TextStyle(fontSize: 30)),
                                     const Text("Threads created", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
                                   ],
-                                ),
-                              );
-                            }
+                                );
+                              }
+                          }
                         }
-                      }
+                      ),
                     ),
                     SizedBox(
                       width: _screen.width * 0.30,
