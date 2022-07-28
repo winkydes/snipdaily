@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
   var currentUser = FirebaseAuth.instance.currentUser!;
   late final Stream<UserPref> userStream = db.collection("Users").where("uid", isEqualTo: currentUser.uid).snapshots().map((item) => UserPref.fromSnapshot(item.docs.first));
   late final snipData = db.collection("snippets").where("authorId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).where("verified", isEqualTo: VERIFIED);
+  late final msgData = db.collection("topics").where("contributorId", isEqualTo: FirebaseAuth.instance.currentUser!.uid);
   late var userDisplayName = '';
 
   Future<void> _signOut() async {
@@ -83,14 +86,27 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                           }
                         }
                     ),
-                    SizedBox(
-                      width: _screen.width * 0.30,
-                      child: Column(
-                        children: const [
-                          Text("0", style: TextStyle(fontSize: 30)),
-                          Text("Answers Provided", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
-                        ],
-                      ),
+                    FutureBuilder<int>(
+                      future: msgData.get().then((value) => value.size),
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.waiting: return const Text('Loading....');
+                          default:
+                            if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            } else {
+                              return SizedBox(
+                                width: _screen.width * 0.30,
+                                child: Column(
+                                  children: [
+                                    Text(snapshot.data.toString(), style: const TextStyle(fontSize: 30)),
+                                    const Text("Threads created", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
+                                  ],
+                                ),
+                              );
+                            }
+                        }
+                      }
                     ),
                     SizedBox(
                       width: _screen.width * 0.30,
