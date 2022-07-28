@@ -80,3 +80,17 @@ class Message {
     );
   }
 }
+
+class Report {
+  final String userId;
+  final String reportContent;
+
+  Report({required this.userId, required this.reportContent});
+
+  factory Report.fromSnapshot(DocumentSnapshot snapshot) {
+    return Report(
+      userId: snapshot.data().toString().contains('userId') ? snapshot.get('userId') : '',
+      reportContent: snapshot.data().toString().contains('reportContent') ? snapshot.get('reportContent') : '',
+    );
+  }
+}

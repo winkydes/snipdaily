@@ -12,8 +12,6 @@ class SettingsFragment extends StatefulWidget {
 
 class _SettingsFragmentState extends State<SettingsFragment> {
 
-  Widget cancelDeleteAccountButton = TextButton(onPressed: () {}, child: const Text("Cancel"));
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +19,12 @@ class _SettingsFragmentState extends State<SettingsFragment> {
         body: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            SettingsItemWidget(name: "Account Settings", onTapAction: () {},),
             SettingsItemWidget(name: "Light/Dark mode", onTapAction: () {},),
             SettingsItemWidget(name: "Change Language Preference", onTapAction: () {Navigator.pushNamed(context, "/pref");},),
             SettingsItemWidget(name: "Change Your Password", onTapAction: () {},),
-            SettingsItemWidget(name: "Contact us", onTapAction: () {},),
+            SettingsItemWidget(name: "Report a problem", onTapAction: () {
+              Navigator.pushNamed(context, "/report");
+            },),
             SettingsItemWidget(name: "Delete Account", onTapAction: () {
               showDialog(
                 context: context,
@@ -41,7 +40,7 @@ class _SettingsFragmentState extends State<SettingsFragment> {
                           Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
                         },
                         child: const Text("OK")),
-                      cancelDeleteAccountButton,
+                      TextButton(onPressed: () {Navigator.pop(context);}, child: const Text("Cancel")),
                     ],
                   );
                 },

@@ -18,6 +18,7 @@ import 'fragments/exploreFragments/CategoryFragment.dart';
 import 'fragments/exploreFragments/LanguageFragment.dart';
 import 'fragments/exploreFragments/SearchFragment.dart';
 import 'fragments/settingsFragments/PrefFragment.dart';
+import 'fragments/settingsFragments/ReportFragment.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: [
@@ -65,7 +66,8 @@ class Login extends StatelessWidget {
         '/categories': ((context) => const CategoryFragment()),
         '/languages': ((context) => const LanguageFragment()),
         '/rndSnip': ((context) => const RandomSnippetFragment()),
-        '/search': ((context) => const SearchFragment())
+        '/search': ((context) => const SearchFragment()),
+        '/report': ((context) => const ReportFragment()),
       },
     );
   }
