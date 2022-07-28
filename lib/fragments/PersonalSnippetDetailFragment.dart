@@ -31,7 +31,7 @@ class _PersonalSnippetDetailFragmentState extends State<PersonalSnippetDetailFra
     }
   }
 
-  Icon verfiedIcon(verified) {
+  Icon verifiedIcon(verified) {
     switch (verified) {
       case REJECTED: {
         return const Icon(Icons.close, color: Colors.red);
@@ -44,6 +44,21 @@ class _PersonalSnippetDetailFragmentState extends State<PersonalSnippetDetailFra
       }
       default: {
         return const Icon(Icons.error);
+      }
+    }
+  }
+
+  Text verifiedText(String verified) {
+    switch (verified) {
+      case REJECTED:
+      case VERIFIED: {
+        return Text(verified.toUpperCase());
+      }
+      case NOT_VERIFIED: {
+        return const Text("PENDING");
+      }
+      default: {
+        return const Text("Error");
       }
     }
   }
@@ -93,8 +108,8 @@ class _PersonalSnippetDetailFragmentState extends State<PersonalSnippetDetailFra
                           const Text("Status:"),
                           Row(
                             children: [
-                              Text(widget.snip.verified.toUpperCase()),
-                              verfiedIcon(widget.snip.verified),
+                              verifiedText(widget.snip.verified),
+                              verifiedIcon(widget.snip.verified),
                             ],
                           )
                         ],

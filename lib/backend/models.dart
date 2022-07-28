@@ -6,13 +6,12 @@ class Snippet {
   final String title;
   final String description;
   final String language;
-  final String formatType;
   final String type;
   final String authorId;
   final String verified;
   final DateTime date;
 
-  Snippet({required this.id, required this.code, required this.title, required this.description, required this.language, required this.formatType, required this.type, required this.authorId, required this.verified, required this.date});
+  Snippet({required this.id, required this.code, required this.title, required this.description, required this.language, required this.type, required this.authorId, required this.verified, required this.date});
 
   factory Snippet.fromSnapshot(DocumentSnapshot snapshot) {
     
@@ -22,7 +21,6 @@ class Snippet {
       title: snapshot.data().toString().contains('title') ? snapshot.get('title') : '',
       description: snapshot.data().toString().contains('description') ? snapshot.get('description') : '',
       language: snapshot.data().toString().contains('language') ? snapshot.get('language') : '',
-      formatType: snapshot.data().toString().contains('formatType') ? snapshot.get('formatType') : '',
       type: snapshot.data().toString().contains('type') ? snapshot.get('type') : '',
       authorId: snapshot.data().toString().contains('authorId') ? snapshot.get('authorId') : '',
       verified: snapshot.data().toString().contains('verified') ? snapshot.get('verified') : '',

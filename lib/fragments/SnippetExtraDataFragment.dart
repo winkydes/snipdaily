@@ -8,13 +8,11 @@ var db = FirebaseFirestore.instance;
 
 class SnippetExtraDataFragment extends StatefulWidget {
   final String language;
-  final String format;
   final String type;
 
   const SnippetExtraDataFragment(
       {Key? key,
       required this.language,
-      required this.format,
       required this.type})
       : super(key: key);
 
@@ -27,24 +25,6 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
   final snippetController = TextEditingController();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
-
-  // This is the text field or image widget depending on the value in formatDropdownItems
-  Widget getFormatWidget() {
-    if (widget.format == "Text") {
-      return InputTextField(
-          maxLines: 6,
-          hintText: "Your Code Snippet",
-          getTextController: snippetController);
-    } else if (widget.format == "Image") {
-      return Container(
-          margin: const EdgeInsets.all(20),
-          child: const Center(
-            child: Text("Image box (Currently Unsupported)"),
-          ));
-    } else {
-      return const SizedBox.shrink();
-    }
-  }
 
   void checkInput() {
     if (snippetController.text == "" ||
@@ -62,7 +42,6 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
       final snippet = <String, dynamic>{
         "code": snippetController.text,
         "language": widget.language,
-        "formatType": widget.format,
         "title": titleController.text,
         "description": descriptionController.text,
         "type": widget.type,
@@ -91,7 +70,10 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
-              getFormatWidget(),
+              InputTextField(
+                maxLines: 6,
+                hintText: "Your Code Snippet",
+                getTextController: snippetController),
               Container(
                 margin: const EdgeInsets.only(top: 20, bottom: 20),
                 child: Text(

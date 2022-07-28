@@ -32,6 +32,21 @@ class _ProfileSnippetCardViewState extends State<ProfileSnippetCardView> {
     }
   }
 
+  Text verifiedText(String verified) {
+    switch (verified) {
+      case REJECTED:
+      case VERIFIED: {
+        return Text(verified.toUpperCase());
+      }
+      case NOT_VERIFIED: {
+        return const Text("PENDING");
+      }
+      default: {
+        return const Text("Error");
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -61,7 +76,7 @@ class _ProfileSnippetCardViewState extends State<ProfileSnippetCardView> {
               ),
               Row(
                 children: [
-                  Text(widget.cardSnippet.verified.toUpperCase()),
+                  verifiedText(widget.cardSnippet.verified),
                   verfiedIcon(widget.cardSnippet.verified),
                 ],
               )
