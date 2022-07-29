@@ -46,29 +46,36 @@ Future<void> main() async {
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
+  static final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData globalLightTheme = Provider.of<GlobalTheme>(context).globalLightTheme;
     final ThemeData globalDarkTheme = Provider.of<GlobalTheme>(context).globalDarkTheme;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: globalLightTheme,
-      darkTheme: globalDarkTheme,
-      title: 'SnipDaily',
-      initialRoute: '/',
-      routes: {
-        '/': ((context) => const LoginWidget()),
-        '/settings': ((context) => const SettingsFragment()),
-        '/adminHome': ((context) => const AdminHomeFragment()),
-        '/addTopic': ((context) => const AddTopicFragment()),
-        '/pref': ((context) => const PrefFragment()),
-        '/categories': ((context) => const CategoryFragment()),
-        '/languages': ((context) => const LanguageFragment()),
-        '/rndSnip': ((context) => const RandomSnippetFragment()),
-        '/search': ((context) => const SearchFragment()),
-        '/report': ((context) => const ReportFragment()),
-      },
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeNotifier,
+      builder: (_, ThemeMode currentMode, __) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: globalLightTheme,
+          darkTheme: globalDarkTheme,
+          themeMode: currentMode,
+          title: 'SnipDaily',
+          initialRoute: '/',
+          routes: {
+            '/': ((context) => const LoginWidget()),
+            '/settings': ((context) => const SettingsFragment()),
+            '/adminHome': ((context) => const AdminHomeFragment()),
+            '/addTopic': ((context) => const AddTopicFragment()),
+            '/pref': ((context) => const PrefFragment()),
+            '/categories': ((context) => const CategoryFragment()),
+            '/languages': ((context) => const LanguageFragment()),
+            '/rndSnip': ((context) => const RandomSnippetFragment()),
+            '/search': ((context) => const SearchFragment()),
+            '/report': ((context) => const ReportFragment()),
+          },
+        );
+      }
     );
   }
 }

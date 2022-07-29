@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snipdaily/widgets/SettingsItemWidget.dart';
 
+import '../main.dart';
+
 class SettingsFragment extends StatefulWidget {
   const SettingsFragment({Key? key}) : super(key: key);
 
@@ -19,7 +21,12 @@ class _SettingsFragmentState extends State<SettingsFragment> {
         body: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            SettingsItemWidget(name: "Light/Dark mode", onTapAction: () {},),
+            SettingsItemWidget(name: "Light/Dark mode", onTapAction: () {
+              Login.themeNotifier.value =
+                    Login.themeNotifier.value == ThemeMode.light
+                        ? ThemeMode.dark
+                        : ThemeMode.light;
+            },),
             SettingsItemWidget(name: "Change Language Preference", onTapAction: () {Navigator.pushNamed(context, "/pref");},),
             SettingsItemWidget(name: "Change Your Password", onTapAction: () {},),
             SettingsItemWidget(name: "Report a problem", onTapAction: () {
