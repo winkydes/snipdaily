@@ -77,6 +77,7 @@ class _TodaySnipSplashFragmentState extends State<TodaySnipSplashFragment> {
             stream: FirebaseFirestore.instance
               .collection('snippets')
               .where('language', whereIn: languagePrefList)
+              .where('verified', isEqualTo: VERIFIED)
               .snapshots()
               .map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc))),
             builder: (context, snapshot) {
