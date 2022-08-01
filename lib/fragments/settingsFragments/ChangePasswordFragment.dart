@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../widgets/InputTextField.dart';
+
 class ChangePasswordFragment extends StatefulWidget {
   const ChangePasswordFragment({Key? key}) : super(key: key);
 
@@ -30,7 +32,7 @@ class _ChangePasswordFragmentState extends State<ChangePasswordFragment> {
         context: context,
         builder: (context) {
           return const AlertDialog(
-            content: Text("The password you typed is not strong enough or is the same as the old password. Please make sure your password has at least 6 characters."),
+            content: Text("The password you typed is not strong enough. Please make sure your password has at least 6 characters."),
           );
         }
       );
@@ -49,11 +51,12 @@ class _ChangePasswordFragmentState extends State<ChangePasswordFragment> {
             padding: EdgeInsets.all(8.0),
             child: Text("Please type in your new password"),
           ),
-          TextField(
-            controller: passwordController,
+          InputTextField(
+            maxLines: 1,
+            hintText: 'Old Password',
+            getTextController: passwordController,
           ),
           TextButton(onPressed: () {updatePassword();}, child: const Text("Verify"))
-
         ],
       ),
     );

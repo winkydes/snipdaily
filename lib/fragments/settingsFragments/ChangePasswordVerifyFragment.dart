@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../widgets/InputTextField.dart';
+
 class ChangePasswordVerifyFragment extends StatefulWidget {
   const ChangePasswordVerifyFragment({Key? key}) : super(key: key);
 
@@ -58,8 +60,10 @@ class _ChangePasswordVerifyFragmentState extends State<ChangePasswordVerifyFragm
             padding: EdgeInsets.all(8.0),
             child: Text("Before proceeding, please type in your original password."),
           ),
-          TextField(
-            controller: passwordController,
+          InputTextField(
+            maxLines: 1,
+            hintText: 'Old Password',
+            getTextController: passwordController,
           ),
           TextButton(onPressed: () {checkPassword();}, child: const Text("Verify"))
         ],

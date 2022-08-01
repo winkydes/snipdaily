@@ -6,8 +6,7 @@ class InputTextField extends StatefulWidget {
   final TextEditingController getTextController;
 
   const InputTextField(
-      {Key? key, required this.maxLines, required this.hintText, required this.getTextController})
-      : super(key: key);
+      {Key? key, required this.maxLines, required this.hintText, required this.getTextController}) : super(key: key);
 
   @override
   State<InputTextField> createState() => _InputTextFieldState();
