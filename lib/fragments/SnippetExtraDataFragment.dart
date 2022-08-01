@@ -48,6 +48,7 @@ class _SnippetExtraDataFragmentState extends State<SnippetExtraDataFragment> {
         "authorId": FirebaseAuth.instance.currentUser!.uid,
         "verified": NOT_VERIFIED,
         "date": DateTime.now(),
+        "liked": [],
       };
       db.collection("snippets").add(snippet);
       Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);

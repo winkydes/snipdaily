@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snipdaily/fragments/OtherProfileFragment.dart';
 import '../backend/models.dart';
@@ -17,6 +20,7 @@ class SnippetDetailFragment extends StatefulWidget {
 class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
 
   double customFontSize = 15;
+  late bool likedState = widget.snip.liked.contains(FirebaseAuth.instance.currentUser!.uid);
 
   resize(bool larger) {
     if (larger && customFontSize < 30) {
@@ -28,6 +32,19 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
       setState(() {
         customFontSize = customFontSize - 5;
       });
+    }
+  }
+
+  handleLike(Snippet snip) {
+    setState(() {
+      likedState = !likedState;
+    });
+    if (likedState) {
+      snip.liked.add(FirebaseAuth.instance.currentUser!.uid);
+      FirebaseFirestore.instance.collection('snippets').doc(snip.id).update({'liked': snip.liked});
+    } else if (snip.liked.contains(FirebaseAuth.instance.currentUser!.uid)) {
+      snip.liked.remove(FirebaseAuth.instance.currentUser!.uid);
+      FirebaseFirestore.instance.collection('snippets').doc(snip.id).update({'liked': snip.liked});
     }
   }
 
@@ -142,24 +159,21 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                         style: const TextStyle(fontSize: 18.0, height: 1.5),
                       )),
                   ),
-                  
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          "Do you find this snippet useful?",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        )
-                      ),
-                      Row(
-                        children: [
-                          IconButton(onPressed: () {}, icon: const Icon(Icons.thumb_up, size: 36, color: Colors.green,)),
-                          IconButton(onPressed: () {}, icon: const Icon(Icons.thumb_down, size: 36, color: Colors.red,)),
-                        ],
-                      )
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                            "Do you find this snippet useful?",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        likedState? 
+                          IconButton(onPressed: () {handleLike(widget.snip);}, icon: const Icon(Icons.thumb_up, size: 36, color: Colors.green,))
+                          :
+                          IconButton(onPressed: () {handleLike(widget.snip);}, icon: const Icon(Icons.thumb_up_outlined, size: 36, color: Colors.green,)),
+                      ],
+                    ),
                   )
                 ],
             ));

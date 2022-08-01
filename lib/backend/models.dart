@@ -10,8 +10,9 @@ class Snippet {
   final String authorId;
   final String verified;
   final DateTime date;
+  final List<dynamic> liked;
 
-  Snippet({required this.id, required this.code, required this.title, required this.description, required this.language, required this.type, required this.authorId, required this.verified, required this.date});
+  Snippet({required this.id, required this.code, required this.title, required this.description, required this.language, required this.type, required this.authorId, required this.verified, required this.date, required this.liked});
 
   factory Snippet.fromSnapshot(DocumentSnapshot snapshot) {
     
@@ -25,6 +26,7 @@ class Snippet {
       authorId: snapshot.data().toString().contains('authorId') ? snapshot.get('authorId') : '',
       verified: snapshot.data().toString().contains('verified') ? snapshot.get('verified') : '',
       date: snapshot.data().toString().contains('date') ? snapshot.get('date').toDate() : DateTime.parse('0000-00-00 00:00:00Z'),
+      liked: snapshot.data().toString().contains('liked') ? snapshot.get('liked') : [],
     );
   }
 }
