@@ -17,6 +17,8 @@ import 'fragments/adminFragments/AdminHomeFragment.dart';
 import 'fragments/exploreFragments/CategoryFragment.dart';
 import 'fragments/exploreFragments/LanguageFragment.dart';
 import 'fragments/exploreFragments/SearchFragment.dart';
+import 'fragments/settingsFragments/ChangePasswordFragment.dart';
+import 'fragments/settingsFragments/ChangePasswordVerifyFragment.dart';
 import 'fragments/settingsFragments/PrefFragment.dart';
 import 'fragments/settingsFragments/ReportFragment.dart';
 
@@ -73,6 +75,8 @@ class Login extends StatelessWidget {
             '/rndSnip': ((context) => const RandomSnippetFragment()),
             '/search': ((context) => const SearchFragment()),
             '/report': ((context) => const ReportFragment()),
+            '/changePasswordVerify': ((context) => const ChangePasswordVerifyFragment()),
+            '/changePassword': ((context) => const ChangePasswordFragment()),
           },
         );
       }
