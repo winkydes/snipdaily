@@ -62,7 +62,7 @@ class _ChatroomFragmentState extends State<ChatroomFragment> {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Container(
-                    color: Colors.white,
+                    color: Theme.of(context).backgroundColor,
                     padding:
                         const EdgeInsets.only(bottom: 10, top: 10),
                     width: double.infinity,

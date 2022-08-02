@@ -74,7 +74,7 @@ class _SearchFragmentState extends State<SearchFragment> {
                   },
                 ),
                 hintText: 'Search...',
-                fillColor: Colors.white,
+                fillColor: Theme.of(context).backgroundColor,
                 border: InputBorder.none),
             ),
           ),

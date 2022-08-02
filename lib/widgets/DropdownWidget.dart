@@ -56,10 +56,10 @@ class _DropdownWidgetState extends State<DropdownWidget> {
             icon: const Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Icon(Icons.arrow_drop_down)),
-            iconEnabledColor: Colors.white,
+            iconEnabledColor: Theme.of(context).backgroundColor,
             dropdownColor: Theme.of(context).primaryColor,
-            style: const TextStyle(
-                color: Colors.white, //Font color
+            style: TextStyle(
+                color: Theme.of(context).backgroundColor, //Font color
                 fontSize: 20 //font size on dropdown button
                 ),
             underline: Container(),

@@ -27,7 +27,6 @@ class _InputTextFieldState extends State<InputTextField> {
       controller: widget.getTextController,
       decoration: InputDecoration(
         labelText: widget.hintText,
-        fillColor: Colors.white,
         border: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey, width: 1.0)),
         focusedBorder: const OutlineInputBorder(
