@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:snipdaily/widgets/SnippetCardView.dart';
 import '../backend/models.dart';
 import '../fragments/FullContributionListFragment.dart';
 import 'ProfileSnippetCardView.dart';
@@ -23,9 +24,9 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
       .map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
 
   late final List<Snippet> snippetList = [];
-  late final List<Widget> snippetWidgetList = [];
+  late final List<ProfileSnippetCardView> snippetWidgetList = [];
 
-  List<Widget> sortedSnippetSubList(List<Snippet> list) {
+  List<ProfileSnippetCardView> sortedSnippetSubList(List<Snippet> list) {
     list.sort((a, b) => b.date.compareTo(a.date));
     for (var snip in list) {
       snippetWidgetList.add(ProfileSnippetCardView(

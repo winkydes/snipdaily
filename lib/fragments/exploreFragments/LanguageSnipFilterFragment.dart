@@ -13,6 +13,7 @@ class LanguageSnipFilterFragment extends StatefulWidget {
 }
 
 class _LanguageSnipFilterFragmentState extends State<LanguageSnipFilterFragment> {
+  String sortType = 'trending';
   // take data from firebase in the form of Stream<Iterable<Snippet>>
   late final Stream<Iterable<Snippet>> _snippetStream = FirebaseFirestore
       .instance
@@ -23,6 +24,16 @@ class _LanguageSnipFilterFragmentState extends State<LanguageSnipFilterFragment>
       .map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
 
   late final List<SnippetCardView> snippetList = [];
+
+  List<SnippetCardView> sortByDate(List<SnippetCardView> snipList) {
+    snipList.sort((a, b) => b.cardSnippet.date.compareTo(a.cardSnippet.date));
+    return snipList;
+  }
+
+  List<SnippetCardView> sortByPopularity(List<SnippetCardView> snipList) {
+    snipList.sort((a, b) => b.cardSnippet.liked.length.compareTo(a.cardSnippet.liked.length));
+    return snipList;
+  }
 
   // initialize snippetList for rendering in screen
   @override
@@ -63,7 +74,26 @@ class _LanguageSnipFilterFragmentState extends State<LanguageSnipFilterFragment>
               return ListView(
                   padding: const EdgeInsets.only(
                       left: 30, right: 30, top: 30, bottom: 30),
-                  children: snippetList);
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        if (sortType == 'trending') {
+                          setState(() {
+                            sortType = 'newest';
+                          });
+                        } else {
+                          setState(() {
+                            sortType = 'trending';
+                          });
+                        }
+                        
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 5),
+                        child: Text(sortType == 'trending' ? "Sort by popularity": "Sort from newest to oldest", style: const TextStyle(fontWeight: FontWeight.bold),)
+                      ),
+                    ),
+                  ] + (sortType == 'trending' ? sortByPopularity(snippetList): sortByDate(snippetList)));
             }),
     );
   }
