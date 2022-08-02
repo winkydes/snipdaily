@@ -20,6 +20,7 @@ class ProfileFragment extends StatefulWidget {
 class _ProfileFragmentState extends State<ProfileFragment> {
   var db = FirebaseFirestore.instance;
   var currentUser = FirebaseAuth.instance.currentUser!;
+  int likeCount = 0;
   late final Stream<UserPref> userStream = db.collection("Users").where("uid", isEqualTo: currentUser.uid).snapshots().map((item) => UserPref.fromSnapshot(item.docs.first));
   late final snipData = db.collection("snippets").where("authorId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).where("verified", isEqualTo: VERIFIED);
   late final msgData = db.collection("topics").where("contributorId", isEqualTo: FirebaseAuth.instance.currentUser!.uid);
@@ -37,6 +38,11 @@ class _ProfileFragmentState extends State<ProfileFragment> {
     userStream.forEach((element) {
       userDisplayName = element.displayName;
     });
+    snipData.get().then((value) => value.docs.map((item) => Snippet.fromSnapshot(item)).forEach((element) { 
+      setState(() {
+        likeCount = likeCount + element.liked.length;
+      });
+    }));
     super.initState();
   }
   @override
@@ -78,7 +84,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                                 return Column(
                                 children: [
                                   Text(snapshot.data.toString(), style: const TextStyle(fontSize: 30)),
-                                  const Text("Contributions Verified", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
+                                  const Text("Contributions", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
                                 ],
                               );
                               }
@@ -110,18 +116,19 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                     ),
                     SizedBox(
                       width: _screen.width * 0.30,
-                      child: Column(
-                        children: const [
-                          Text("0", style: TextStyle(fontSize: 30)),
-                          Text("Achievements Unlocked", textAlign: TextAlign.center, style: TextStyle(fontSize: 15,), maxLines: 2,)
-                        ],
-                      ),
+                      child: 
+                        Column(
+                          children: [
+                            Text(likeCount.toString(), style: const TextStyle(fontSize: 30)),
+                            const Text("Likes gained", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
+                          ],
+                        )
                     ),
-                  ],
+                  ]
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 20, left: 20),
+                margin: const EdgeInsets.only(top: 20, left: 22, bottom: 7),
                 child: const Text("Recent Contributions", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
               ),
               RecentContributionSummaryBox(targetUid: FirebaseAuth.instance.currentUser!.uid,),

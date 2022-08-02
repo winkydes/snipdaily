@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snipdaily/fragments/AddSnippetFragment.dart';
 import 'package:snipdaily/fragments/ProfileFragment.dart';
-import 'package:snipdaily/fragments/BadgesFragment.dart';
 import 'package:snipdaily/fragments/CommunityFragment.dart';
 import 'fragments/exploreFragments/ExploreFragment.dart';
 
@@ -19,11 +18,10 @@ class _HomeScreenState extends State<HomeScreen> {
     const ExploreFragment(),
     const CommunityFragment(),
     const AddSnippetFragment(),
-    const BadgesFragment(),
     const ProfileFragment(),
   ];
 
-  var widgetTitle = ["Home", "Community", "Add Snippet", "Ask", "Profile"];
+  var widgetTitle = ["Home", "Community", "Add Snippet", "Profile"];
 
   void onItemTapped(int index) {
     setState(() {
@@ -46,10 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.add),
               label: 'Contribute'
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.emoji_events),
-              label: 'Badges'
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
