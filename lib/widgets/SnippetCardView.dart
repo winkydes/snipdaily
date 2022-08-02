@@ -20,7 +20,7 @@ class SnippetCardView extends StatelessWidget {
             ListTile(
               title: Text(cardSnippet.title),
               subtitle: Text(
-                cardSnippet.language,
+                "${cardSnippet.liked.length} 🔥  ${cardSnippet.language}",
               ),
             ),
           ],

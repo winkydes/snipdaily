@@ -22,7 +22,7 @@ class _LanguageSnipFilterFragmentState extends State<LanguageSnipFilterFragment>
       .snapshots()
       .map((item) => item.docs.map((doc) => Snippet.fromSnapshot(doc)));
 
-  late final List<Widget> snippetList = [];
+  late final List<SnippetCardView> snippetList = [];
 
   // initialize snippetList for rendering in screen
   @override
@@ -59,6 +59,7 @@ class _LanguageSnipFilterFragmentState extends State<LanguageSnipFilterFragment>
                   ),
                 );
               }
+              snippetList.sort((a, b) => b.cardSnippet.liked.length.compareTo(a.cardSnippet.liked.length));
               return ListView(
                   padding: const EdgeInsets.only(
                       left: 30, right: 30, top: 30, bottom: 30),

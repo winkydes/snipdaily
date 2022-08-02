@@ -69,7 +69,7 @@ class _ProfileSnippetCardViewState extends State<ProfileSnippetCardView> {
                       style: const TextStyle(fontWeight: FontWeight.bold)
                     ),
                     Text(
-                      widget.cardSnippet.language,
+                      "${widget.cardSnippet.liked.length} 🔥  ${widget.cardSnippet.language}",
                     ),
                   ],
                 ),
