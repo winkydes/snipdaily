@@ -31,8 +31,11 @@ class _ChangePasswordFragmentState extends State<ChangePasswordFragment> {
       showDialog(
         context: context,
         builder: (context) {
-          return const AlertDialog(
-            content: Text("The password you typed is not strong enough. Please make sure your password has at least 6 characters."),
+          return AlertDialog(
+            content: const Text("The password you typed is not strong enough. Please make sure your password has at least 6 characters."),
+            actions: [
+              TextButton(onPressed: () {Navigator.pop(context);}, child: const Text("OK")),
+            ],
           );
         }
       );

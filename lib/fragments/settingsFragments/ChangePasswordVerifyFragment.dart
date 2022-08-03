@@ -18,8 +18,11 @@ class _ChangePasswordVerifyFragmentState extends State<ChangePasswordVerifyFragm
       showDialog(
         context: context,
         builder: (context) {
-          return const AlertDialog(
-            content: Text("Passowrd is missing, please try again."),
+          return AlertDialog(
+            content: const Text("Passowrd is missing, please try again."),
+            actions: [
+              TextButton(onPressed: () {Navigator.pop(context);}, child: const Text("OK")),
+            ],
           );
         },
       );
@@ -39,8 +42,11 @@ class _ChangePasswordVerifyFragmentState extends State<ChangePasswordVerifyFragm
         showDialog(
           context: context,
           builder: (context) {
-            return const AlertDialog(
-              content: Text("The password you typed is incorrect. Please try again."),
+            return AlertDialog(
+              content: const Text("The password you typed is incorrect. Please try again."),
+              actions: [
+                TextButton(onPressed: () {Navigator.pop(context);}, child: const Text("OK")),
+              ],
             );
           }
         );

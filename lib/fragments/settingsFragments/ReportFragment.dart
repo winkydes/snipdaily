@@ -22,6 +22,18 @@ class _ReportFragmentState extends State<ReportFragment> {
       };
       db.collection("report").add(report);
       Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: const Text("Some fields are missing, please try again."),
+            actions: [
+              TextButton(onPressed: () {Navigator.pop(context);}, child: const Text("OK")),
+            ],
+          );
+        },
+      );
     }
   }
 

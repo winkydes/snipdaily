@@ -32,8 +32,11 @@ class _PrefFragmentState extends State<PrefFragment> {
     showDialog(
       context: context,
       builder: (context) {
-        return const AlertDialog(
-          content: Text("Changing language preferences will tell us which kind of snippets you would like to study. Choosing the options below will only affect results of random snippets and every day's snippet suggestion. ")
+        return AlertDialog(
+          content: const Text("Changing language preferences will tell us which kind of snippets you would like to study. Choosing the options below will only affect results of random snippets and every day's snippet suggestion. "),
+          actions: [
+            TextButton(onPressed: () {Navigator.pop(context);}, child: const Text("OK")),
+          ],
         );
       }
     );

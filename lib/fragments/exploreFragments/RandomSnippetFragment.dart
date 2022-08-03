@@ -25,8 +25,11 @@ class _RandomSnippetFragmentState extends State<RandomSnippetFragment> {
     showDialog(
       context: context,
       builder: (context) {
-        return const AlertDialog(
-          content: Text("The snippets suggested to you here are chosen according to your language preferences. If you did not choose any language as your preference, then any snippet could appear here. To change your language preferences, please go to the settings under your profile.")
+        return AlertDialog(
+          content: const Text("The snippets suggested to you here are chosen according to your language preferences. If you did not choose any language as your preference, then any snippet could appear here. To change your language preferences, please go to the settings under your profile."),
+          actions: [
+            TextButton(onPressed: () {Navigator.pushNamed(context, '/pref');}, child: const Text("Go to language preference")),
+          ],
         );
       }
     );
