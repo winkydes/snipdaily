@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../assets/constants.dart';
 import '../backend/models.dart';
+import '../widgets/HomeButton.dart';
 import '../widgets/LanguageLabel.dart';
 import '../widgets/TypeLabel.dart';
+import 'OtherProfileFragment.dart';
 
 class PersonalSnippetDetailFragment extends StatefulWidget {
   final Snippet snip;
@@ -78,7 +80,11 @@ class _PersonalSnippetDetailFragmentState extends State<PersonalSnippetDetailFra
         } else {
           var author = snapshot.data!.docs.first['displayName'];
           return Scaffold(
-            appBar: AppBar(title: const Text("Details")),
+            appBar: AppBar(
+              title: const Text("Details"),
+              actions: const [
+                HomeButton(),
+              ],),
             body: ListView(
               padding: const EdgeInsets.only(
                 left: 20, right: 20, top: 20, bottom: 20),
@@ -89,10 +95,23 @@ class _PersonalSnippetDetailFragmentState extends State<PersonalSnippetDetailFra
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   // author container
-                  Container(
-                    alignment: Alignment.centerRight,
-                    margin: const EdgeInsets.only(right: 10, bottom: 10),
-                    child: Text("-- by $author", style: Theme.of(context).textTheme.bodySmall)),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 5),
+                        child: Text(widget.snip.date == DateTime.parse('0000-00-00 00:00:00Z')? 'Date not available': "${widget.snip.date.year.toString()}-${widget.snip.date.month.toString().padLeft(2,'0')}-${widget.snip.date.day.toString().padLeft(2,'0')}", style: Theme.of(context).textTheme.bodyMedium),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 5),
+                        child: GestureDetector(
+                          onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OtherProfileFragment(authorId: widget.snip.authorId,)));},
+                          child: Text("---- by $author", style: Theme.of(context).textTheme.bodyMedium)
+                        )
+                      ),
+                    ],
+                  ),
                   // status container
                   Card(
                     margin: const EdgeInsets.only(bottom: 5),

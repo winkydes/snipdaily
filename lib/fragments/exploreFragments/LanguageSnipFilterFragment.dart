@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../assets/constants.dart';
 import '../../backend/models.dart';
+import '../../widgets/HomeButton.dart';
 import '../../widgets/SnippetCardView.dart';
 
 class LanguageSnipFilterFragment extends StatefulWidget {
@@ -83,7 +84,11 @@ class _LanguageSnipFilterFragmentState extends State<LanguageSnipFilterFragment>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(widget.language)),
+        appBar: AppBar(
+          title: Text(widget.language),
+          actions: const [
+            HomeButton(),
+          ],),
         body: StreamBuilder<Iterable<Snippet>>(
             stream: _snippetStream,
             builder: (context, snapshot) {

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snipdaily/fragments/OtherProfileFragment.dart';
 import '../backend/models.dart';
+import '../widgets/HomeButton.dart';
 import '../widgets/LanguageLabel.dart';
 import '../widgets/TypeLabel.dart';
 
@@ -61,7 +62,11 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
         } else {
           var author = snapshot.data!.docs.isEmpty? 'Deleted User' : snapshot.data!.docs.first['displayName'];
           return Scaffold(
-            appBar: AppBar(title: const Text("Details")),
+            appBar: AppBar(
+              title: const Text("Details"),
+              actions: const [
+                HomeButton(),
+              ],),
             body: ListView(
               padding: const EdgeInsets.only(
                 left: 20, right: 20, top: 20, bottom: 20),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:snipdaily/assets/constants.dart';
+import 'package:snipdaily/widgets/HomeButton.dart';
 import 'package:snipdaily/widgets/SnippetCardView.dart';
 import '../backend/models.dart';
 
@@ -84,7 +85,11 @@ class _SnippetListFragmentState extends State<SnippetListFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(widget.type)),
+        appBar: AppBar(
+          title: Text(widget.type),
+          actions: const [
+            HomeButton(),
+          ],),
         body: StreamBuilder<Iterable<Snippet>>(
             stream: _snippetStream,
             builder: (context, snapshot) {
