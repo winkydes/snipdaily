@@ -5,6 +5,7 @@ import 'package:snipdaily/assets/constants.dart';
 import '../../backend/models.dart';
 import '../../widgets/LanguageLabel.dart';
 import '../../widgets/TypeLabel.dart';
+import '../OtherProfileFragment.dart';
 
 class RandomSnippetFragment extends StatefulWidget {
   const RandomSnippetFragment({Key? key}) : super(key: key);
@@ -85,49 +86,83 @@ class _RandomSnippetFragmentState extends State<RandomSnippetFragment> {
               List<Snippet> randomSnippetList = snapshot.data!.toList();
               randomSnippetList.shuffle();
               Snippet randomSnip = randomSnippetList.first;
-              return ListView(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
-                children: [
-                  Text(
-                    randomSnip.title,
-                    style: Theme.of(context).textTheme.headline5,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+              return StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                  .collection('Users')
+                  .where("uid", isEqualTo: randomSnip.authorId)
+                  .snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    var author = snapshot.data!.docs.isEmpty? 'Deleted User' : snapshot.data!.docs.first['displayName'];
+                    return ListView(
+                      padding: const EdgeInsets.all(20),
                       children: [
-                        LanguageLabel(language: randomSnip.language),
-                        TypeLabel(type: randomSnip.type),
+                        // title container
+                        Text(
+                          randomSnip.title,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        // author and date container
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(top: 5, bottom: 5),
+                              child: Text(randomSnip.date == DateTime.parse('0000-00-00 00:00:00Z')? 'Date not available': "${randomSnip.date.year.toString()}-${randomSnip.date.month.toString().padLeft(2,'0')}-${randomSnip.date.day.toString().padLeft(2,'0')}", style: Theme.of(context).textTheme.bodyMedium),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 5),
+                              child: GestureDetector(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OtherProfileFragment(authorId: randomSnip.authorId,)));},
+                                child: Text("---- by $author", style: Theme.of(context).textTheme.bodyMedium)
+                              )
+                            ),
+                          ],
+                        ),
+                        // label container
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              LanguageLabel(language: randomSnip.language),
+                              TypeLabel(type: randomSnip.type),
+                            ],
+                          ),
+                        ),
+                        Card(
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 10, bottom: 20),
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0),
+                            ),
+                            child: Text(randomSnip.code,
+                              style: TextStyle(
+                                fontSize: customFontSize,
+                                fontFamily: 'Consolas',
+                              ))),
+                        ),
+                        Card(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0),
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            child: Text(
+                              randomSnip.description,
+                              style: const TextStyle(fontSize: 18.0, height: 1.5),
+                            )),
+                        ),
                       ],
-                    ),
-                  ]),
-                  Card(
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 10, bottom: 20),
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: Text(randomSnip.code,
-                        style: TextStyle(
-                          fontSize: customFontSize,
-                          fontFamily: 'Consolas',
-                        ))),
-                  ),
-                  Card(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        randomSnip.description,
-                        style: const TextStyle(fontSize: 18.0, height: 1.5),
-                      )),
-                  ),
-                ],
+                    );
+                  }
+                }
               );
             }
           );

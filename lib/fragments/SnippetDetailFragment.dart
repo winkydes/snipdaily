@@ -76,17 +76,17 @@ class _SnippetDetailFragmentState extends State<SnippetDetailFragment> {
                     widget.snip.title,
                     style: Theme.of(context).textTheme.headline5,
                   ),
-                  // author container
+                  // author and date container
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(top: 5),
+                        margin: const EdgeInsets.only(top: 5, bottom: 5),
                         child: Text(widget.snip.date == DateTime.parse('0000-00-00 00:00:00Z')? 'Date not available': "${widget.snip.date.year.toString()}-${widget.snip.date.month.toString().padLeft(2,'0')}-${widget.snip.date.day.toString().padLeft(2,'0')}", style: Theme.of(context).textTheme.bodyMedium),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(top: 5),
+                        margin: const EdgeInsets.only(top: 5, bottom: 5),
                         child: GestureDetector(
                           onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OtherProfileFragment(authorId: widget.snip.authorId,)));},
                           child: Text("---- by $author", style: Theme.of(context).textTheme.bodyMedium)
