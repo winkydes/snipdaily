@@ -3,7 +3,6 @@ import 'package:snipdaily/fragments/exploreFragments/languageSnipFilterFragment.
 import 'package:snipdaily/widgets/SettingsItemWidget.dart';
 
 import '../../assets/constants.dart';
-import '../../widgets/LanguageLabel.dart';
 
 class LanguageFragment extends StatelessWidget {
   const LanguageFragment({Key? key}) : super(key: key);

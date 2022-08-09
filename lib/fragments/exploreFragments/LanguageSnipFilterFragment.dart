@@ -14,6 +14,8 @@ class LanguageSnipFilterFragment extends StatefulWidget {
 
 class _LanguageSnipFilterFragmentState extends State<LanguageSnipFilterFragment> {
   String sortType = 'trending';
+  int pageLength = 10;
+  int currentPageNum = 1;
   // take data from firebase in the form of Stream<Iterable<Snippet>>
   late final Stream<Iterable<Snippet>> _snippetStream = FirebaseFirestore
       .instance
@@ -27,12 +29,45 @@ class _LanguageSnipFilterFragmentState extends State<LanguageSnipFilterFragment>
 
   List<SnippetCardView> sortByDate(List<SnippetCardView> snipList) {
     snipList.sort((a, b) => b.cardSnippet.date.compareTo(a.cardSnippet.date));
-    return snipList;
+    return snipList.sublist((currentPageNum-1) * pageLength, (currentPageNum-1) * pageLength + pageLength < snipList.length ? (currentPageNum-1) * pageLength + pageLength : snipList.length);
   }
 
   List<SnippetCardView> sortByPopularity(List<SnippetCardView> snipList) {
     snipList.sort((a, b) => b.cardSnippet.liked.length.compareTo(a.cardSnippet.liked.length));
-    return snipList;
+    return snipList.sublist((currentPageNum-1) * pageLength, (currentPageNum-1) * pageLength + pageLength < snipList.length ? (currentPageNum-1) * pageLength + pageLength : snipList.length);
+  }
+
+    List<Row> pageButton() {
+    return [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          (currentPageNum == 1?
+            const SizedBox.shrink() : 
+            TextButton(
+              onPressed: () { 
+                setState(() {
+                  currentPageNum --;
+                });
+              },
+              child: const Text("Previous page"),
+            )
+          ),
+          (currentPageNum == (snippetList.length/pageLength).ceil()?
+            const SizedBox.shrink() : 
+            TextButton(
+              onPressed: () { 
+                setState(() {
+                  currentPageNum ++;
+                });
+              },
+              child: const Text("Next page"),
+            )
+          ),
+          
+        ],
+      )
+    ];
   }
 
   // initialize snippetList for rendering in screen
@@ -93,7 +128,8 @@ class _LanguageSnipFilterFragmentState extends State<LanguageSnipFilterFragment>
                         child: Text(sortType == 'trending' ? "Sort by popularity": "Sort from newest to oldest", style: const TextStyle(fontWeight: FontWeight.bold),)
                       ),
                     ),
-                  ] + (sortType == 'trending' ? sortByPopularity(snippetList): sortByDate(snippetList)));
+                  ] + (sortType == 'trending' ? sortByPopularity(snippetList): sortByDate(snippetList))
+                   + (snippetList.length > pageLength? pageButton() : [const SizedBox.shrink()]));
             }),
     );
   }
