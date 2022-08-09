@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:snipdaily/assets/constants.dart';
 import 'package:snipdaily/backend/models.dart';
 import 'package:snipdaily/widgets/RecentContributionSummaryBox.dart';
@@ -18,14 +17,12 @@ class OtherProfileFragment extends StatefulWidget {
 class _OtherProfileFragmentState extends State<OtherProfileFragment> {
   var db = FirebaseFirestore.instance;
   var currentUser = FirebaseAuth.instance.currentUser!;
+  int likeCount = 0;
   late final Stream<UserPref> userStream = db.collection("Users").where("uid", isEqualTo: widget.authorId).snapshots().map((item) => UserPref.fromSnapshot(item.docs.first));
   late final snipData = db.collection("snippets").where("authorId", isEqualTo: widget.authorId).where("verified", isEqualTo: VERIFIED);
+  late final msgData = db.collection("topics").where("contributorId", isEqualTo: FirebaseAuth.instance.currentUser!.uid);
   late var userDisplayName = '';
   late var userUid = '';
-
-  Future<void> _signOut() async {
-    await FirebaseAuth.instance.signOut();
-  }
 
   @override
   void initState() {
@@ -33,6 +30,11 @@ class _OtherProfileFragmentState extends State<OtherProfileFragment> {
       userDisplayName = element.displayName;
       userUid = element.uid;
     });
+    snipData.get().then((value) => value.docs.map((item) => Snippet.fromSnapshot(item)).forEach((element) { 
+      setState(() {
+        likeCount = likeCount + element.liked.length;
+      });
+    }));
     super.initState();
   }
   @override
@@ -85,21 +87,35 @@ class _OtherProfileFragmentState extends State<OtherProfileFragment> {
                     ),
                     SizedBox(
                       width: _screen.width * 0.30,
-                      child: Column(
-                        children: const [
-                          Text("0", style: TextStyle(fontSize: 30)),
-                          Text("Answers Provided", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
-                        ],
+                      child: FutureBuilder<int>(
+                        future: msgData.get().then((value) => value.size),
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting: return const Center(child: Text('Loading....'));
+                            default:
+                              if (snapshot.hasError) {
+                                return Center(child: Text('Error: ${snapshot.error}'));
+                              } else {
+                                return Column(
+                                  children: [
+                                    Text(snapshot.data.toString(), style: const TextStyle(fontSize: 30)),
+                                    const Text("Threads created", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
+                                  ],
+                                );
+                              }
+                          }
+                        }
                       ),
                     ),
                     SizedBox(
                       width: _screen.width * 0.30,
-                      child: Column(
-                        children: const [
-                          Text("0", style: TextStyle(fontSize: 30)),
-                          Text("Achievements Unlocked", textAlign: TextAlign.center, style: TextStyle(fontSize: 15,), maxLines: 2,)
-                        ],
-                      ),
+                      child: 
+                        Column(
+                          children: [
+                            Text(likeCount.toString(), style: const TextStyle(fontSize: 30)),
+                            const Text("Likes gained", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
+                          ],
+                        )
                     ),
                   ],
                 ),

@@ -82,7 +82,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                                 return Column(
                                 children: [
                                   Text(snapshot.data.toString(), style: const TextStyle(fontSize: 30)),
-                                  const Text("Contributions", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
+                                  const Text("Contributions Verified", textAlign: TextAlign.center, style: TextStyle(fontSize: 15), maxLines: 2,)
                                 ],
                               );
                               }
