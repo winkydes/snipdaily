@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:snipdaily/widgets/SnippetCardView.dart';
 import '../backend/models.dart';
 import '../fragments/FullContributionListFragment.dart';
 import 'ProfileSnippetCardView.dart';
@@ -26,13 +25,8 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
   late final List<Snippet> snippetList = [];
   late final List<ProfileSnippetCardView> snippetWidgetList = [];
 
-  List<ProfileSnippetCardView> sortedSnippetSubList(List<Snippet> list) {
-    list.sort((a, b) => b.date.compareTo(a.date));
-    for (var snip in list) {
-      snippetWidgetList.add(ProfileSnippetCardView(
-      cardSnippet: snip,
-    ));
-    }
+  List<ProfileSnippetCardView> sortedSnippetSubList(List<ProfileSnippetCardView> list) {
+    list.sort((a, b) => b.cardSnippet.date.compareTo(a.cardSnippet.date));
     if (list.length < 3) {
       return snippetWidgetList;
     } else {
@@ -44,7 +38,11 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
   @override
   void initState() {
     _snippetStream.forEach((element) => {
-      element.forEach((snip) => snippetList.add(snip))
+      element.forEach((snip) {
+        snippetWidgetList.add(ProfileSnippetCardView(
+          cardSnippet: snip,
+        ));
+        })
     });
     super.initState();
   }
@@ -64,7 +62,7 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
             child: CircularProgressIndicator(),
           );
         }
-        if (snippetList.isEmpty) {
+        if (snippetWidgetList.isEmpty) {
           return const Center(
             child: Text(
               "This person did not upload any snippets yet",
@@ -77,7 +75,7 @@ class _RecentContributionSummaryBoxState extends State<RecentContributionSummary
             Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
-                children: sortedSnippetSubList(snippetList),
+                children: sortedSnippetSubList(snippetWidgetList),
               ),
             ),
             Container(
